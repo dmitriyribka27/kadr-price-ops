@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#101315" />
+  <meta name="description" content="Локальный калькулятор цен и себестоимости КАДР" />
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <link rel="icon" href="./icon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="./icon.svg" />
+  <link rel="stylesheet" href="./styles.css" />
+  <title>КАДР / PRICE OPS</title>
+</head>
+<body>
+  <div id="app">
+    <header class="topbar">
+      <div class="brand"><span class="brand-mark">К</span><span><b>КАДР</b><small>PRICE OPS / LOCAL</small></span></div>
+      <span class="offline-indicator" id="network">ЛОКАЛЬНО</span>
+    </header>
+    <main class="container">
+      <div class="intro"><div><div class="eyebrow">ПЕЧАТЬ × ДИЗАЙН</div><h1 id="page-title">Калькулятор</h1><p id="page-subtitle">Быстрый расчёт заказа и маржи.</p></div><div class="date-chip">₾ GEL</div></div>
+      <nav class="tabs" aria-label="Разделы">
+        <button class="tab active" data-page="calculator">Калькулятор</button>
+        <button class="tab" data-page="catalog">Каталог SKU</button>
+        <button class="tab" data-page="materials">Материалы</button>
+        <button class="tab" data-page="settings">Данные</button>
+      </nav>
+      <section id="calculator" class="page active">
+        <div class="layout">
+          <div class="panel form-panel">
+            <div class="panel-heading"><h2>Параметры заказа</h2><span class="muted">01 / ВВОД</span></div>
+            <label class="field"><span>Категория</span><select id="category-filter"></select></label>
+            <label class="field"><span>Позиция SKU</span><select id="sku-select"></select></label>
+            <div id="sku-description" class="sku-description"></div>
+            <div class="two-fields">
+              <label class="field"><span>Количество SKU</span><input type="number" id="quantity" min="1" step="1" value="1" inputmode="numeric" /></label>
+              <label class="field"><span>Скидка на заказ, ₾</span><input type="number" id="discount" min="0" step="0.01" value="0" inputmode="decimal" /></label>
+            </div>
+            <div class="two-fields">
+              <label class="field"><span>Работа / резка, ₾</span><input type="number" id="labor" min="0" step="0.01" value="0" inputmode="decimal" /></label>
+              <label class="field"><span>Прочие затраты, ₾</span><input type="number" id="extras" min="0" step="0.01" value="0" inputmode="decimal" /></label>
+            </div>
+            <p class="hint">Работа и прочие затраты вводятся за <b>весь заказ</b>. Для комплектов количество означает число комплектов.</p>
+            <div class="form-actions"><button class="button secondary" id="reset-calculator">Сбросить расчёт</button><button class="button" id="copy-result">Скопировать итог</button></div>
+          </div>
+          <div class="results">
+            <div class="hero-metric"><div class="eyebrow">ПРИБЫЛЬ ОТ ЗАКАЗА</div><div class="money" id="profit-value">—</div><div id="profit-status" class="profit-status">Укажите параметры</div></div>
+            <div class="metric-grid">
+              <div class="metric"><span>Выручка</span><strong id="revenue-value">—</strong></div>
+              <div class="metric"><span>Маржа</span><strong id="margin-value">—</strong></div>
+              <div class="metric"><span>Материалы</span><strong id="materials-value">—</strong></div>
+              <div class="metric"><span>Полные затраты</span><strong id="cost-value">—</strong></div>
+            </div>
+            <div class="panel breakdown"><div class="panel-heading"><h2>Структура заказа</h2><span class="muted">02 / ИТОГ</span></div>
+              <div class="breakdown-row"><span>Изделий</span><b id="units-value">—</b></div>
+              <div class="breakdown-row"><span>Листов на печать</span><b id="sheets-value">—</b></div>
+              <div class="breakdown-row"><span>Цена за SKU</span><b id="unit-price-value">—</b></div>
+              <div class="breakdown-row"><span>Работа + доп. расходы</span><b id="overhead-value">—</b></div>
+              <div class="breakdown-row"><span>Скидка</span><b id="discount-value">—</b></div>
+              <p id="calc-warning" class="warning" hidden></p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="catalog" class="page">
+        <div class="panel">
+          <div class="panel-heading"><div><h2>Номенклатура</h2><p class="muted">Цены указаны за SKU, включая комплекты.</p></div><button class="button" id="add-sku">+ Новый SKU</button></div>
+          <div class="toolbar"><input id="sku-search" placeholder="Поиск SKU или позиции…" aria-label="Поиск SKU" /><select id="catalog-category" aria-label="Категория"></select></div>
+          <div class="table-wrap"><table><thead><tr><th>SKU / Позиция</th><th>Цена SKU</th><th>Материалы</th><th>До труда</th><th></th></tr></thead><tbody id="sku-table"></tbody></table></div>
+        </div>
+      </section>
+      <section id="materials" class="page">
+        <div class="panel"><div class="panel-heading"><div><h2>Стоимость материалов</h2><p class="muted">Цена листа и чернил пересчитывает весь каталог.</p></div><button class="button" id="add-material">+ Материал</button></div><div id="materials-list" class="material-list"></div></div>
+      </section>
+      <section id="settings" class="page">
+        <div class="panel"><h2>Данные и резервные копии</h2><p class="muted">Данные сохраняются на этом устройстве. Между телефонами и компьютерами они не синхронизируются.</p>
+          <div class="settings-actions"><button class="button" id="export-data">Скачать JSON-копию</button><label class="button secondary upload-button">Восстановить из JSON<input type="file" id="import-data" accept=".json,application/json" hidden /></label></div>
+          <div class="warning-box">Перед очисткой браузера, сменой телефона или переустановкой приложения обязательно скачайте резервную копию.</div>
+          <button class="button danger" id="reset-all">Вернуть исходный прайс</button>
+        </div>
+        <div class="panel info-panel"><h2>Методика расчёта</h2><p>Выручка = цена SKU × количество − скидка.</p><p>Материалы = округление количества изделий до целых листов × (бумага + чернила).</p><p>Прибыль = выручка − материалы − труд − прочие затраты.</p><p>Маржа = прибыль / выручка × 100%.</p><p class="muted">Учитывайте брак, упаковку, доставку и налоги в прочих затратах, если они оплачиваются КАДРОМ. До их ввода показатель не является чистой бухгалтерской прибылью.</p></div>
+      </section>
+    </main>
+    <footer>КАДР / ВАШИ ИДЕИ НА БУМАГЕ <span>v1.0</span></footer>
+  </div>
+  <dialog id="edit-dialog"><form method="dialog" id="edit-form"><div class="dialog-head"><h2 id="dialog-title">Редактирование</h2><button type="button" class="icon-button" id="close-dialog" aria-label="Закрыть">×</button></div><div id="dialog-fields"></div><div class="dialog-actions"><button type="button" class="button secondary" id="cancel-dialog">Отмена</button><button class="button" id="save-dialog" value="save">Сохранить</button></div></form></dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
