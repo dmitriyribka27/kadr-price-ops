@@ -1,931 +1,330 @@
 {
-  "version": 1,
+  "version": 2,
   "materials": [
     {
       "id": "PHOTO10",
       "name": "Фотобумага 10×15",
-      "sheetCost": 0.07,
+      "sheetCost": null,
       "inkCost": 0.1,
-      "unit": "лист",
-      "note": "0,07 ₾ — внесено в таблицу, уточнить закупку"
+      "note": "Закупочная цена листа неизвестна. Заполните для расчёта прибыли."
     },
     {
       "id": "PHOTOA4",
-      "name": "Глянцевая фотобумага А4",
+      "name": "Фотобумага A4 глянцевая",
       "sheetCost": 0.225,
       "inkCost": 0.2,
-      "unit": "лист",
-      "note": "200 г/м²: предварительный ориентир, тест подачи не завершён"
+      "note": "Ориентир 200 г/м²; подача бумаги требует теста."
     },
     {
       "id": "STICKER",
-      "name": "Самоклеящаяся А4",
+      "name": "Самоклеящаяся бумага A4",
       "sheetCost": 0.3,
       "inkCost": 0.2,
-      "unit": "лист",
-      "note": "Цена ориентировочная"
+      "note": "Ориентир; уточните цену закупки."
     }
   ],
   "skus": [
     {
-      "id": "PH10-1",
-      "category": "Фото",
-      "name": "Фото 10×15 · 1–49 шт.",
-      "unit": "штука",
+      "id": "PH10",
+      "category": "Фотопечать",
+      "name": "Фото 10×15",
+      "unit": "шт.",
       "units": 1,
+      "material": "PHOTO10",
+      "yield": 1,
       "price": 0.5,
-      "material": "PHOTO10",
-      "yield": 1,
-      "ink": 0.1,
-      "cutIncluded": 0,
-      "min": 1,
-      "max": 49,
-      "note": "Бумага 10×15: закупочная цена не установлена"
+      "tiers": [
+        {
+          "from": 1,
+          "to": 49,
+          "price": 0.5
+        },
+        {
+          "from": 50,
+          "to": null,
+          "price": 0.45
+        }
+      ],
+      "note": ""
     },
     {
-      "id": "PH10-50",
-      "category": "Фото",
-      "name": "Фото 10×15 · 50–99 шт.",
-      "unit": "штука",
+      "id": "PHA4",
+      "category": "Фотопечать",
+      "name": "Фото А4",
+      "unit": "шт.",
       "units": 1,
-      "price": 0.45,
-      "material": "PHOTO10",
+      "material": "PHOTOA4",
       "yield": 1,
-      "ink": 0.1,
-      "cutIncluded": 0,
-      "min": 50,
-      "max": 99,
-      "note": "Бумага 10×15: закупочная цена не установлена"
-    },
-    {
-      "id": "PH10-100",
-      "category": "Фото",
-      "name": "Фото 10×15 · 100+ шт.",
-      "unit": "штука",
-      "units": 1,
-      "price": 0.4,
-      "material": "PHOTO10",
-      "yield": 1,
-      "ink": 0.1,
-      "cutIncluded": 0,
-      "min": 100,
-      "max": 9999,
-      "note": "Бумага 10×15: закупочная цена не установлена"
-    },
-    {
-      "id": "PHA4-1",
-      "category": "Фото",
-      "name": "Фото А4 · 1–9 шт.",
-      "unit": "штука",
-      "units": 1,
       "price": 2,
-      "material": "PHOTOA4",
-      "yield": 1,
-      "ink": 0.2,
-      "cutIncluded": 0,
-      "min": 1,
-      "max": 9,
-      "note": "Бумага А4 200 г/м² требует теста"
+      "tiers": [
+        {
+          "from": 1,
+          "to": 9,
+          "price": 2
+        },
+        {
+          "from": 10,
+          "to": null,
+          "price": 1.8
+        }
+      ],
+      "note": ""
     },
     {
-      "id": "PHA4-10",
-      "category": "Фото",
-      "name": "Фото А4 · 10+ шт.",
-      "unit": "штука",
-      "units": 1,
-      "price": 1.8,
-      "material": "PHOTOA4",
-      "yield": 1,
-      "ink": 0.2,
-      "cutIncluded": 0,
-      "min": 10,
-      "max": 9999,
-      "note": "Бумага А4 200 г/м² требует теста"
-    },
-    {
-      "id": "POL-1",
+      "id": "POL",
       "category": "Polaroid",
-      "name": "Polaroid · 1 шт.",
-      "unit": "набор",
+      "name": "Polaroid",
+      "unit": "шт.",
       "units": 1,
-      "price": 3,
-      "material": "PHOTOA4",
-      "yield": 8,
-      "ink": 0.2,
-      "cutIncluded": 0,
-      "min": 1,
-      "max": 9999,
-      "note": "Резка включена в труд; А4 расходуется целиком"
+      "material": "PHOTO10",
+      "yield": 2,
+      "price": 2,
+      "tiers": [
+        {
+          "from": 1,
+          "to": 1,
+          "price": 2
+        },
+        {
+          "from": 2,
+          "to": null,
+          "price": 1.5
+        }
+      ],
+      "note": "2 полароида на одном листе 10×15."
     },
     {
-      "id": "POL-2",
-      "category": "Polaroid",
-      "name": "Polaroid · 2 шт.",
-      "unit": "набор",
+      "id": "STR-CLASSIC",
+      "category": "Фотополоски",
+      "name": "Классическая · 2 полоски по 4 кадра",
+      "unit": "комплект",
       "units": 2,
-      "price": 4,
-      "material": "PHOTOA4",
-      "yield": 8,
-      "ink": 0.2,
-      "cutIncluded": 0,
-      "min": 1,
-      "max": 9999,
-      "note": "Резка включена в труд; А4 расходуется целиком"
+      "material": "PHOTO10",
+      "yield": 2,
+      "price": 1.5,
+      "tiers": [
+        {
+          "from": 1,
+          "to": null,
+          "price": 1.5
+        }
+      ],
+      "note": "Один комплект = один лист 10×15."
     },
     {
-      "id": "POL-4",
-      "category": "Polaroid",
-      "name": "Polaroid · 4 шт.",
-      "unit": "набор",
-      "units": 4,
-      "price": 5,
-      "material": "PHOTOA4",
-      "yield": 8,
-      "ink": 0.2,
-      "cutIncluded": 0,
-      "min": 1,
-      "max": 9999,
-      "note": "Резка включена в труд; А4 расходуется целиком"
-    },
-    {
-      "id": "POL-8",
-      "category": "Polaroid",
-      "name": "Polaroid · 8 шт.",
-      "unit": "набор",
-      "units": 8,
-      "price": 7,
-      "material": "PHOTOA4",
-      "yield": 8,
-      "ink": 0.2,
-      "cutIncluded": 0,
-      "min": 1,
-      "max": 9999,
-      "note": "Резка включена в труд; А4 расходуется целиком"
-    },
-    {
-      "id": "POL-16",
-      "category": "Polaroid",
-      "name": "Polaroid · 16 шт.",
-      "unit": "набор",
-      "units": 16,
-      "price": 12,
-      "material": "PHOTOA4",
-      "yield": 8,
-      "ink": 0.2,
-      "cutIncluded": 0,
-      "min": 1,
-      "max": 9999,
-      "note": "Резка включена в труд; А4 расходуется целиком"
-    },
-    {
-      "id": "MIN-1",
-      "category": "Мини-фото",
-      "name": "Мини-фото · 1 шт.",
-      "unit": "набор",
-      "units": 1,
-      "price": 3,
-      "material": "PHOTOA4",
-      "yield": 20,
-      "ink": 0.2,
-      "cutIncluded": 0,
-      "min": 1,
-      "max": 9999,
-      "note": ""
-    },
-    {
-      "id": "MIN-5",
-      "category": "Мини-фото",
-      "name": "Мини-фото · 5 шт.",
-      "unit": "набор",
-      "units": 5,
-      "price": 4,
-      "material": "PHOTOA4",
-      "yield": 20,
-      "ink": 0.2,
-      "cutIncluded": 0,
-      "min": 1,
-      "max": 9999,
-      "note": ""
-    },
-    {
-      "id": "MIN-10",
-      "category": "Мини-фото",
-      "name": "Мини-фото · 10 шт.",
-      "unit": "набор",
-      "units": 10,
-      "price": 5,
-      "material": "PHOTOA4",
-      "yield": 20,
-      "ink": 0.2,
-      "cutIncluded": 0,
-      "min": 1,
-      "max": 9999,
-      "note": ""
-    },
-    {
-      "id": "MIN-20",
-      "category": "Мини-фото",
-      "name": "Мини-фото · 20 шт.",
-      "unit": "набор",
-      "units": 20,
-      "price": 8,
-      "material": "PHOTOA4",
-      "yield": 20,
-      "ink": 0.2,
-      "cutIncluded": 0,
-      "min": 1,
-      "max": 9999,
-      "note": ""
-    },
-    {
-      "id": "MIN-40",
-      "category": "Мини-фото",
-      "name": "Мини-фото · 40 шт.",
-      "unit": "набор",
-      "units": 40,
-      "price": 14,
-      "material": "PHOTOA4",
-      "yield": 20,
-      "ink": 0.2,
-      "cutIncluded": 0,
-      "min": 1,
-      "max": 9999,
-      "note": ""
-    },
-    {
-      "id": "MIN-60",
-      "category": "Мини-фото",
-      "name": "Мини-фото · 60 шт.",
-      "unit": "набор",
-      "units": 60,
-      "price": 19,
-      "material": "PHOTOA4",
-      "yield": 20,
-      "ink": 0.2,
-      "cutIncluded": 0,
-      "min": 1,
-      "max": 9999,
-      "note": ""
-    },
-    {
-      "id": "STR-1",
+      "id": "STR-MINI",
       "category": "Фотополоски",
-      "name": "Фотополоски · 1 шт.",
-      "unit": "набор",
-      "units": 1,
-      "price": 3,
-      "material": "PHOTOA4",
-      "yield": 4,
-      "ink": 0.2,
-      "cutIncluded": 0,
-      "min": 1,
-      "max": 9999,
-      "note": "Classic/Mini — проверить размер"
-    },
-    {
-      "id": "STR-2",
-      "category": "Фотополоски",
-      "name": "Фотополоски · 2 шт.",
-      "unit": "набор",
-      "units": 2,
-      "price": 4,
-      "material": "PHOTOA4",
-      "yield": 4,
-      "ink": 0.2,
-      "cutIncluded": 0,
-      "min": 1,
-      "max": 9999,
-      "note": "Classic/Mini — проверить размер"
-    },
-    {
-      "id": "STR-3",
-      "category": "Фотополоски",
-      "name": "Фотополоски · 3 шт.",
-      "unit": "набор",
+      "name": "Mini · 3 полоски по 3 кадра",
+      "unit": "комплект",
       "units": 3,
-      "price": 5,
-      "material": "PHOTOA4",
-      "yield": 4,
-      "ink": 0.2,
-      "cutIncluded": 0,
-      "min": 1,
-      "max": 9999,
-      "note": "Classic/Mini — проверить размер"
+      "material": "PHOTO10",
+      "yield": 3,
+      "price": 1.5,
+      "tiers": [
+        {
+          "from": 1,
+          "to": null,
+          "price": 1.5
+        }
+      ],
+      "note": "Один комплект = один лист 10×15."
     },
     {
-      "id": "STR-4",
-      "category": "Фотополоски",
-      "name": "Фотополоски · 4 шт.",
-      "unit": "набор",
-      "units": 4,
-      "price": 6,
-      "material": "PHOTOA4",
-      "yield": 4,
-      "ink": 0.2,
-      "cutIncluded": 0,
-      "min": 1,
-      "max": 9999,
-      "note": "Classic/Mini — проверить размер"
+      "id": "MINI6",
+      "category": "Мини-фото",
+      "name": "Мини-фото 50×50 · комплект 6 шт.",
+      "unit": "комплект",
+      "units": 6,
+      "material": "PHOTO10",
+      "yield": 6,
+      "price": 2,
+      "tiers": [
+        {
+          "from": 1,
+          "to": null,
+          "price": 2
+        }
+      ],
+      "note": "Комплект 6 мини-фото с одного 10×15."
     },
     {
-      "id": "STR-8",
-      "category": "Фотополоски",
-      "name": "Фотополоски · 8 шт.",
-      "unit": "набор",
-      "units": 8,
-      "price": 10,
-      "material": "PHOTOA4",
-      "yield": 4,
-      "ink": 0.2,
-      "cutIncluded": 0,
-      "min": 1,
-      "max": 9999,
-      "note": "Classic/Mini — проверить размер"
-    },
-    {
-      "id": "STR-12",
-      "category": "Фотополоски",
-      "name": "Фотополоски · 12 шт.",
-      "unit": "набор",
-      "units": 12,
-      "price": 14,
-      "material": "PHOTOA4",
-      "yield": 4,
-      "ink": 0.2,
-      "cutIncluded": 0,
-      "min": 1,
-      "max": 9999,
-      "note": "Classic/Mini — проверить размер"
-    },
-    {
-      "id": "ST-A4-1",
+      "id": "ST-A4",
       "category": "Стикеры",
-      "name": "Стикер-лист А4 · 1 шт. (без резки)",
-      "unit": "набор",
-      "units": 1,
-      "price": 4,
-      "material": "STICKER",
-      "yield": 1,
-      "ink": 0.2,
-      "cutIncluded": 0,
-      "min": 1,
-      "max": 9999,
-      "note": ""
-    },
-    {
-      "id": "ST-A4-2",
-      "category": "Стикеры",
-      "name": "Стикер-лист А4 · 2 шт. (без резки)",
-      "unit": "набор",
-      "units": 2,
-      "price": 7,
-      "material": "STICKER",
-      "yield": 1,
-      "ink": 0.2,
-      "cutIncluded": 0,
-      "min": 1,
-      "max": 9999,
-      "note": ""
-    },
-    {
-      "id": "ST-A4-5",
-      "category": "Стикеры",
-      "name": "Стикер-лист А4 · 5 шт. (без резки)",
-      "unit": "набор",
-      "units": 5,
-      "price": 15,
-      "material": "STICKER",
-      "yield": 1,
-      "ink": 0.2,
-      "cutIncluded": 0,
-      "min": 1,
-      "max": 9999,
-      "note": ""
-    },
-    {
-      "id": "ST-A4-10",
-      "category": "Стикеры",
-      "name": "Стикер-лист А4 · 10 шт. (без резки)",
-      "unit": "набор",
-      "units": 10,
-      "price": 27,
-      "material": "STICKER",
-      "yield": 1,
-      "ink": 0.2,
-      "cutIncluded": 0,
-      "min": 1,
-      "max": 9999,
-      "note": ""
-    },
-    {
-      "id": "ST-A4-20",
-      "category": "Стикеры",
-      "name": "Стикер-лист А4 · 20 шт. (без резки)",
-      "unit": "набор",
-      "units": 20,
-      "price": 50,
-      "material": "STICKER",
-      "yield": 1,
-      "ink": 0.2,
-      "cutIncluded": 0,
-      "min": 1,
-      "max": 9999,
-      "note": ""
-    },
-    {
-      "id": "ST-A4-50",
-      "category": "Стикеры",
-      "name": "Стикер-лист А4 · 50 шт. (без резки)",
-      "unit": "набор",
-      "units": 50,
-      "price": 115,
-      "material": "STICKER",
-      "yield": 1,
-      "ink": 0.2,
-      "cutIncluded": 0,
-      "min": 1,
-      "max": 9999,
-      "note": ""
-    },
-    {
-      "id": "ST-PACK-1",
-      "category": "Стикеры",
-      "name": "Стикер-пак · 1 наклеек (простая резка)",
-      "unit": "набор",
-      "units": 1,
-      "price": 3,
-      "material": "STICKER",
-      "yield": 20,
-      "ink": 0.2,
-      "cutIncluded": 0,
-      "min": 1,
-      "max": 9999,
-      "note": "Простая резка включена; фактическая раскладка может отличаться"
-    },
-    {
-      "id": "ST-PACK-5",
-      "category": "Стикеры",
-      "name": "Стикер-пак · 5 наклеек (простая резка)",
-      "unit": "набор",
-      "units": 5,
-      "price": 7,
-      "material": "STICKER",
-      "yield": 20,
-      "ink": 0.2,
-      "cutIncluded": 0,
-      "min": 1,
-      "max": 9999,
-      "note": "Простая резка включена; фактическая раскладка может отличаться"
-    },
-    {
-      "id": "ST-PACK-10",
-      "category": "Стикеры",
-      "name": "Стикер-пак · 10 наклеек (простая резка)",
-      "unit": "набор",
-      "units": 10,
-      "price": 12,
-      "material": "STICKER",
-      "yield": 20,
-      "ink": 0.2,
-      "cutIncluded": 0,
-      "min": 1,
-      "max": 9999,
-      "note": "Простая резка включена; фактическая раскладка может отличаться"
-    },
-    {
-      "id": "ST-PACK-20",
-      "category": "Стикеры",
-      "name": "Стикер-пак · 20 наклеек (простая резка)",
-      "unit": "набор",
-      "units": 20,
-      "price": 20,
-      "material": "STICKER",
-      "yield": 20,
-      "ink": 0.2,
-      "cutIncluded": 0,
-      "min": 1,
-      "max": 9999,
-      "note": "Простая резка включена; фактическая раскладка может отличаться"
-    },
-    {
-      "id": "ST-PACK-50",
-      "category": "Стикеры",
-      "name": "Стикер-пак · 50 наклеек (простая резка)",
-      "unit": "набор",
-      "units": 50,
-      "price": 45,
-      "material": "STICKER",
-      "yield": 20,
-      "ink": 0.2,
-      "cutIncluded": 0,
-      "min": 1,
-      "max": 9999,
-      "note": "Простая резка включена; фактическая раскладка может отличаться"
-    },
-    {
-      "id": "CUT-простая",
-      "category": "Доп. услуги",
-      "name": "Резка А4 · простая",
+      "name": "Стикер-лист А4 без резки",
       "unit": "лист",
       "units": 1,
+      "material": "STICKER",
+      "yield": 1,
+      "price": 3,
+      "tiers": [
+        {
+          "from": 1,
+          "to": 4,
+          "price": 3
+        },
+        {
+          "from": 5,
+          "to": null,
+          "price": 2
+        }
+      ],
+      "note": ""
+    },
+    {
+      "id": "ST-PACK-S",
+      "category": "Стикеры",
+      "name": "Стикер-пак · простая форма",
+      "unit": "лист",
+      "units": 1,
+      "material": "STICKER",
+      "yield": 1,
+      "price": 5,
+      "tiers": [
+        {
+          "from": 1,
+          "to": null,
+          "price": 5
+        }
+      ],
+      "note": "Цена за лист с ручной резкой, труд вносится отдельно в калькуляторе."
+    },
+    {
+      "id": "ST-PACK-C",
+      "category": "Стикеры",
+      "name": "Стикер-пак · сложная форма",
+      "unit": "лист",
+      "units": 1,
+      "material": "STICKER",
+      "yield": 1,
+      "price": 7,
+      "tiers": [
+        {
+          "from": 1,
+          "to": null,
+          "price": 7
+        }
+      ],
+      "note": "Цена за лист с ручной резкой, труд вносится отдельно в калькуляторе."
+    },
+    {
+      "id": "BUS",
+      "category": "Визитки",
+      "name": "Визитки · 90×50 мм",
+      "unit": "шт.",
+      "units": 1,
+      "material": "PHOTOA4",
+      "yield": 9,
+      "price": 0.45,
+      "tiers": [
+        {
+          "from": 50,
+          "to": 99,
+          "price": 0.45
+        },
+        {
+          "from": 100,
+          "to": null,
+          "price": 0.4
+        }
+      ],
+      "note": "До 50 шт. цена не согласована; 9 визиток с листа A4."
+    },
+    {
+      "id": "CERT-A6",
+      "category": "Сертификаты / флаеры",
+      "name": "Сертификаты / флаеры A6",
+      "unit": "шт.",
+      "units": 1,
+      "material": "PHOTOA4",
+      "yield": 4,
       "price": 1,
-      "material": "NONE",
-      "yield": 1,
-      "ink": 0,
-      "cutIncluded": 0,
-      "min": 1,
-      "max": 9999,
-      "note": "Добавлять отдельно к листам, не к пакам с простой резкой"
+      "tiers": [
+        {
+          "from": 10,
+          "to": 49,
+          "price": 1
+        },
+        {
+          "from": 50,
+          "to": null,
+          "price": 0.8
+        }
+      ],
+      "note": "Для 1–9 шт. цена не согласована. Раскладку проверить."
     },
     {
-      "id": "CUT-фигурная",
-      "category": "Доп. услуги",
-      "name": "Резка А4 · фигурная",
-      "unit": "лист",
+      "id": "CERT-A5",
+      "category": "Сертификаты / флаеры",
+      "name": "Сертификаты / флаеры A5",
+      "unit": "шт.",
       "units": 1,
-      "price": 3,
-      "material": "NONE",
-      "yield": 1,
-      "ink": 0,
-      "cutIncluded": 0,
-      "min": 1,
-      "max": 9999,
-      "note": "Добавлять отдельно к листам, не к пакам с простой резкой"
+      "material": "PHOTOA4",
+      "yield": 2,
+      "price": 1.5,
+      "tiers": [
+        {
+          "from": 10,
+          "to": 49,
+          "price": 1.5
+        },
+        {
+          "from": 50,
+          "to": null,
+          "price": 1.3
+        }
+      ],
+      "note": "Для 1–9 шт. цена не согласована. Раскладку проверить."
     },
     {
-      "id": "CUT-сложная",
-      "category": "Доп. услуги",
-      "name": "Резка А4 · сложная",
-      "unit": "лист",
+      "id": "CERT-A4",
+      "category": "Сертификаты / флаеры",
+      "name": "Сертификаты / флаеры A4",
+      "unit": "шт.",
       "units": 1,
-      "price": 5,
-      "material": "NONE",
+      "material": "PHOTOA4",
       "yield": 1,
-      "ink": 0,
-      "cutIncluded": 0,
-      "min": 1,
-      "max": 9999,
-      "note": "Добавлять отдельно к листам, не к пакам с простой резкой"
-    },
-    {
-      "id": "BUS-10",
-      "category": "Визитки",
-      "name": "Визитки 90×50 · 10 шт.",
-      "unit": "набор",
-      "units": 10,
-      "price": 6,
-      "material": "PHOTOA4",
-      "yield": 10,
-      "ink": 0.2,
-      "cutIncluded": 0,
-      "min": 1,
-      "max": 9999,
-      "note": "Односторонняя, материал требует теста"
-    },
-    {
-      "id": "BUS-20",
-      "category": "Визитки",
-      "name": "Визитки 90×50 · 20 шт.",
-      "unit": "набор",
-      "units": 20,
-      "price": 11,
-      "material": "PHOTOA4",
-      "yield": 10,
-      "ink": 0.2,
-      "cutIncluded": 0,
-      "min": 1,
-      "max": 9999,
-      "note": "Односторонняя, материал требует теста"
-    },
-    {
-      "id": "BUS-50",
-      "category": "Визитки",
-      "name": "Визитки 90×50 · 50 шт.",
-      "unit": "набор",
-      "units": 50,
-      "price": 25,
-      "material": "PHOTOA4",
-      "yield": 10,
-      "ink": 0.2,
-      "cutIncluded": 0,
-      "min": 1,
-      "max": 9999,
-      "note": "Односторонняя, материал требует теста"
-    },
-    {
-      "id": "BUS-100",
-      "category": "Визитки",
-      "name": "Визитки 90×50 · 100 шт.",
-      "unit": "набор",
-      "units": 100,
-      "price": 45,
-      "material": "PHOTOA4",
-      "yield": 10,
-      "ink": 0.2,
-      "cutIncluded": 0,
-      "min": 1,
-      "max": 9999,
-      "note": "Односторонняя, материал требует теста"
-    },
-    {
-      "id": "CERT-А6-1",
-      "category": "Сертификаты",
-      "name": "Сертификат А6 · 1 шт.",
-      "unit": "набор",
-      "units": 1,
       "price": 2,
-      "material": "PHOTOA4",
-      "yield": 4,
-      "ink": 0.2,
-      "cutIncluded": 0,
-      "min": 1,
-      "max": 9999,
-      "note": "Раскладка с полями и односторонняя печать требуют теста"
+      "tiers": [
+        {
+          "from": 10,
+          "to": 49,
+          "price": 2
+        },
+        {
+          "from": 50,
+          "to": null,
+          "price": 1.7
+        }
+      ],
+      "note": "Для 1–9 шт. цена не согласована."
     },
     {
-      "id": "CERT-А6-5",
-      "category": "Сертификаты",
-      "name": "Сертификат А6 · 5 шт.",
-      "unit": "набор",
-      "units": 5,
-      "price": 6,
-      "material": "PHOTOA4",
-      "yield": 4,
-      "ink": 0.2,
-      "cutIncluded": 0,
-      "min": 1,
-      "max": 9999,
-      "note": "Раскладка с полями и односторонняя печать требуют теста"
-    },
-    {
-      "id": "CERT-А6-10",
-      "category": "Сертификаты",
-      "name": "Сертификат А6 · 10 шт.",
-      "unit": "набор",
-      "units": 10,
-      "price": 10,
-      "material": "PHOTOA4",
-      "yield": 4,
-      "ink": 0.2,
-      "cutIncluded": 0,
-      "min": 1,
-      "max": 9999,
-      "note": "Раскладка с полями и односторонняя печать требуют теста"
-    },
-    {
-      "id": "CERT-А6-20",
-      "category": "Сертификаты",
-      "name": "Сертификат А6 · 20 шт.",
-      "unit": "набор",
-      "units": 20,
-      "price": 18,
-      "material": "PHOTOA4",
-      "yield": 4,
-      "ink": 0.2,
-      "cutIncluded": 0,
-      "min": 1,
-      "max": 9999,
-      "note": "Раскладка с полями и односторонняя печать требуют теста"
-    },
-    {
-      "id": "CERT-А6-50",
-      "category": "Сертификаты",
-      "name": "Сертификат А6 · 50 шт.",
-      "unit": "набор",
-      "units": 50,
-      "price": 40,
-      "material": "PHOTOA4",
-      "yield": 4,
-      "ink": 0.2,
-      "cutIncluded": 0,
-      "min": 1,
-      "max": 9999,
-      "note": "Раскладка с полями и односторонняя печать требуют теста"
-    },
-    {
-      "id": "CERT-А5-1",
-      "category": "Сертификаты",
-      "name": "Сертификат А5 · 1 шт.",
-      "unit": "набор",
+      "id": "CARD-A6",
+      "category": "Открытки",
+      "name": "Открытки A6",
+      "unit": "шт.",
       "units": 1,
+      "material": "PHOTOA4",
+      "yield": 4,
       "price": 3,
-      "material": "PHOTOA4",
-      "yield": 2,
-      "ink": 0.2,
-      "cutIncluded": 0,
-      "min": 1,
-      "max": 9999,
-      "note": "Раскладка с полями и односторонняя печать требуют теста"
-    },
-    {
-      "id": "CERT-А5-5",
-      "category": "Сертификаты",
-      "name": "Сертификат А5 · 5 шт.",
-      "unit": "набор",
-      "units": 5,
-      "price": 10,
-      "material": "PHOTOA4",
-      "yield": 2,
-      "ink": 0.2,
-      "cutIncluded": 0,
-      "min": 1,
-      "max": 9999,
-      "note": "Раскладка с полями и односторонняя печать требуют теста"
-    },
-    {
-      "id": "CERT-А5-10",
-      "category": "Сертификаты",
-      "name": "Сертификат А5 · 10 шт.",
-      "unit": "набор",
-      "units": 10,
-      "price": 18,
-      "material": "PHOTOA4",
-      "yield": 2,
-      "ink": 0.2,
-      "cutIncluded": 0,
-      "min": 1,
-      "max": 9999,
-      "note": "Раскладка с полями и односторонняя печать требуют теста"
-    },
-    {
-      "id": "CERT-А5-20",
-      "category": "Сертификаты",
-      "name": "Сертификат А5 · 20 шт.",
-      "unit": "набор",
-      "units": 20,
-      "price": 32,
-      "material": "PHOTOA4",
-      "yield": 2,
-      "ink": 0.2,
-      "cutIncluded": 0,
-      "min": 1,
-      "max": 9999,
-      "note": "Раскладка с полями и односторонняя печать требуют теста"
-    },
-    {
-      "id": "CERT-А5-50",
-      "category": "Сертификаты",
-      "name": "Сертификат А5 · 50 шт.",
-      "unit": "набор",
-      "units": 50,
-      "price": 75,
-      "material": "PHOTOA4",
-      "yield": 2,
-      "ink": 0.2,
-      "cutIncluded": 0,
-      "min": 1,
-      "max": 9999,
-      "note": "Раскладка с полями и односторонняя печать требуют теста"
-    },
-    {
-      "id": "CERT-А4-1",
-      "category": "Сертификаты",
-      "name": "Сертификат А4 · 1 шт.",
-      "unit": "набор",
-      "units": 1,
-      "price": 4,
-      "material": "PHOTOA4",
-      "yield": 1,
-      "ink": 0.2,
-      "cutIncluded": 0,
-      "min": 1,
-      "max": 9999,
-      "note": "Раскладка с полями и односторонняя печать требуют теста"
-    },
-    {
-      "id": "CERT-А4-5",
-      "category": "Сертификаты",
-      "name": "Сертификат А4 · 5 шт.",
-      "unit": "набор",
-      "units": 5,
-      "price": 15,
-      "material": "PHOTOA4",
-      "yield": 1,
-      "ink": 0.2,
-      "cutIncluded": 0,
-      "min": 1,
-      "max": 9999,
-      "note": "Раскладка с полями и односторонняя печать требуют теста"
-    },
-    {
-      "id": "CERT-А4-10",
-      "category": "Сертификаты",
-      "name": "Сертификат А4 · 10 шт.",
-      "unit": "набор",
-      "units": 10,
-      "price": 27,
-      "material": "PHOTOA4",
-      "yield": 1,
-      "ink": 0.2,
-      "cutIncluded": 0,
-      "min": 1,
-      "max": 9999,
-      "note": "Раскладка с полями и односторонняя печать требуют теста"
-    },
-    {
-      "id": "CERT-А4-20",
-      "category": "Сертификаты",
-      "name": "Сертификат А4 · 20 шт.",
-      "unit": "набор",
-      "units": 20,
-      "price": 50,
-      "material": "PHOTOA4",
-      "yield": 1,
-      "ink": 0.2,
-      "cutIncluded": 0,
-      "min": 1,
-      "max": 9999,
-      "note": "Раскладка с полями и односторонняя печать требуют теста"
-    },
-    {
-      "id": "CERT-А4-50",
-      "category": "Сертификаты",
-      "name": "Сертификат А4 · 50 шт.",
-      "unit": "набор",
-      "units": 50,
-      "price": 110,
-      "material": "PHOTOA4",
-      "yield": 1,
-      "ink": 0.2,
-      "cutIncluded": 0,
-      "min": 1,
-      "max": 9999,
-      "note": "Раскладка с полями и односторонняя печать требуют теста"
-    },
-    {
-      "id": "CARD-1",
-      "category": "Открытки",
-      "name": "Открытки А6 · 1 шт.",
-      "unit": "набор",
-      "units": 1,
-      "price": 2,
-      "material": "PHOTOA4",
-      "yield": 4,
-      "ink": 0.2,
-      "cutIncluded": 0,
-      "min": 1,
-      "max": 9999,
-      "note": "Односторонняя, раскладка требует теста"
-    },
-    {
-      "id": "CARD-5",
-      "category": "Открытки",
-      "name": "Открытки А6 · 5 шт.",
-      "unit": "набор",
-      "units": 5,
-      "price": 6,
-      "material": "PHOTOA4",
-      "yield": 4,
-      "ink": 0.2,
-      "cutIncluded": 0,
-      "min": 1,
-      "max": 9999,
-      "note": "Односторонняя, раскладка требует теста"
-    },
-    {
-      "id": "CARD-10",
-      "category": "Открытки",
-      "name": "Открытки А6 · 10 шт.",
-      "unit": "набор",
-      "units": 10,
-      "price": 10,
-      "material": "PHOTOA4",
-      "yield": 4,
-      "ink": 0.2,
-      "cutIncluded": 0,
-      "min": 1,
-      "max": 9999,
-      "note": "Односторонняя, раскладка требует теста"
-    },
-    {
-      "id": "CARD-20",
-      "category": "Открытки",
-      "name": "Открытки А6 · 20 шт.",
-      "unit": "набор",
-      "units": 20,
-      "price": 18,
-      "material": "PHOTOA4",
-      "yield": 4,
-      "ink": 0.2,
-      "cutIncluded": 0,
-      "min": 1,
-      "max": 9999,
-      "note": "Односторонняя, раскладка требует теста"
-    },
-    {
-      "id": "CARD-50",
-      "category": "Открытки",
-      "name": "Открытки А6 · 50 шт.",
-      "unit": "набор",
-      "units": 50,
-      "price": 40,
-      "material": "PHOTOA4",
-      "yield": 4,
-      "ink": 0.2,
-      "cutIncluded": 0,
-      "min": 1,
-      "max": 9999,
-      "note": "Односторонняя, раскладка требует теста"
+      "tiers": [
+        {
+          "from": 1,
+          "to": 1,
+          "price": 3
+        },
+        {
+          "from": 5,
+          "to": 9,
+          "price": 2
+        },
+        {
+          "from": 10,
+          "to": null,
+          "price": 1.5
+        }
+      ],
+      "note": "Для 2–4 шт. цена не согласована."
     },
     {
       "id": "DS-ST-AD",
@@ -933,14 +332,17 @@
       "name": "Стикеры · адаптация",
       "unit": "услуга",
       "units": 1,
-      "price": 5,
       "material": "NONE",
       "yield": 1,
-      "ink": 0,
-      "cutIncluded": 0,
-      "min": 1,
-      "max": 9999,
-      "note": "Затраты на труд необходимо внести"
+      "price": 5,
+      "tiers": [
+        {
+          "from": 1,
+          "to": null,
+          "price": 5
+        }
+      ],
+      "note": ""
     },
     {
       "id": "DS-ST-NEW",
@@ -948,14 +350,17 @@
       "name": "Стикеры · дизайн по идее",
       "unit": "услуга",
       "units": 1,
-      "price": 10,
       "material": "NONE",
       "yield": 1,
-      "ink": 0,
-      "cutIncluded": 0,
-      "min": 1,
-      "max": 9999,
-      "note": "Затраты на труд необходимо внести"
+      "price": 10,
+      "tiers": [
+        {
+          "from": 1,
+          "to": null,
+          "price": 10
+        }
+      ],
+      "note": ""
     },
     {
       "id": "DS-AD",
@@ -963,14 +368,17 @@
       "name": "Дизайн · адаптация макета",
       "unit": "услуга",
       "units": 1,
-      "price": 20,
       "material": "NONE",
       "yield": 1,
-      "ink": 0,
-      "cutIncluded": 0,
-      "min": 1,
-      "max": 9999,
-      "note": "Затраты на труд необходимо внести"
+      "price": 20,
+      "tiers": [
+        {
+          "from": 1,
+          "to": null,
+          "price": 20
+        }
+      ],
+      "note": ""
     },
     {
       "id": "DS-NEW",
@@ -978,44 +386,53 @@
       "name": "Дизайн · простой с нуля",
       "unit": "услуга",
       "units": 1,
-      "price": 30,
       "material": "NONE",
       "yield": 1,
-      "ink": 0,
-      "cutIncluded": 0,
-      "min": 1,
-      "max": 9999,
-      "note": "Затраты на труд необходимо внести"
+      "price": 30,
+      "tiers": [
+        {
+          "from": 1,
+          "to": null,
+          "price": 30
+        }
+      ],
+      "note": ""
     },
     {
       "id": "DS-CUSTOM",
       "category": "Дизайн",
-      "name": "Индивидуальный дизайн · минимум",
+      "name": "Индивидуальный дизайн · от 30 ₾",
       "unit": "услуга",
       "units": 1,
-      "price": 30,
       "material": "NONE",
       "yield": 1,
-      "ink": 0,
-      "cutIncluded": 0,
-      "min": 1,
-      "max": 9999,
-      "note": "Фактическая цена 30–200 ₾ согласуется по задаче; в калькуляторе можно заменить цену"
+      "price": 30,
+      "tiers": [
+        {
+          "from": 1,
+          "to": null,
+          "price": 30
+        }
+      ],
+      "note": "Согласовать 30–200 ₾; можно изменить тариф."
     },
     {
-      "id": "CANVAS-BASE",
-      "category": "Авторские подарки",
-      "name": "Постер на холсте · стартовая цена",
+      "id": "CANVAS",
+      "category": "Подарки",
+      "name": "Авторский холст · от 100 ₾",
       "unit": "заказ",
       "units": 1,
-      "price": 100,
       "material": "NONE",
       "yield": 1,
-      "ink": 0,
-      "cutIncluded": 0,
-      "min": 1,
-      "max": 9999,
-      "note": "Холст, краски, декор, труд — индивидуально; без заполнения затрат прибыль неизвестна"
+      "price": 100,
+      "tiers": [
+        {
+          "from": 1,
+          "to": null,
+          "price": 100
+        }
+      ],
+      "note": "Обязательно вручную внесите стоимость холста, краски и других материалов."
     }
   ]
 }
