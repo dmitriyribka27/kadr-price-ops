@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 190" preserveAspectRatio="xMidYMid slice">
+<defs>
+<pattern id="rug" patternUnits="userSpaceOnUse" width="36" height="36"><rect width="36" height="36" fill="#52181d"/><path d="M0 18L18 0 36 18 18 36zM5 18L18 5l13 13-13 13z" fill="none" stroke="#e7be93" stroke-width="2" opacity=".75"/><path d="M18 8v20M8 18h20" stroke="#e7be93" stroke-width="1.5"/><circle cx="18" cy="18" r="3" fill="#c78f68"/></pattern>
+<pattern id="small" patternUnits="userSpaceOnUse" width="12" height="12"><path d="M0 6L6 0 12 6 6 12z" fill="none" stroke="#6a2528" stroke-width=".5" opacity=".3"/></pattern>
+<linearGradient id="fade"><stop stop-color="#e6c7a2" stop-opacity=".2"/><stop offset=".3" stop-color="#e6c7a2" stop-opacity="0"/><stop offset=".7" stop-color="#e6c7a2" stop-opacity="0"/><stop offset="1" stop-color="#e6c7a2" stop-opacity=".2"/></linearGradient>
+</defs>
+<rect width="1500" height="190" fill="url(#small)" opacity=".45"/>
+<g opacity=".78">
+<path d="M0 0H210l-45 24-35 35-80-18L0 68z" fill="url(#rug)"/>
+<path d="M0 101l68-20 38 14-32 95H0z" fill="url(#rug)"/>
+<path d="M1500 0h-205l44 31 31 35 82-22 48 23z" fill="url(#rug)"/>
+<path d="M1500 90l-78-18-42 22 33 96h87z" fill="url(#rug)"/>
+</g>
+<g opacity=".4" stroke="#42201c" stroke-width="2" fill="none">
+<path d="M72 128V57l21-13 21 13v71M77 127h53V67l-10-6H70zM85 127V77h32v50M95 77V62m13 15V62"/>
+<path d="M59 130h89M57 136h94M75 57l20-26 23 26"/>
+<path d="M1400 139v-48h21v48M1387 140h47M1405 91V69h12v22M1406 69l5-14 6 14M1411 57V43"/>
+<path d="M1289 145q20-29 47 0h25v-28h12v28h65M1230 146q24-33 53 0h7"/>
+<circle cx="1302" cy="110" r="30"/><circle cx="1302" cy="110" r="21"/><path d="M1302 80v60m-30-30h60m-51-21l42 42m0-42l-42 42m21 9v11m-18-2h36"/>
+<path d="M1187 152q44-26 80 0t75 0 78 0"/>
+</g>
+<g fill="#78272b" opacity=".6">
+<path d="M191 64l7 16 17 7-17 7-7 16-7-16-17-7 17-7z"/>
+<path d="M1323 30l5 12 12 5-12 5-5 12-5-12-12-5 12-5z"/>
+<path d="M282 20l4 9 9 4-9 4-4 9-4-9-9-4 9-4z"/>
+</g>
+<rect width="1500" height="190" fill="url(#fade)"/>
+</svg>

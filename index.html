@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#101315" />
+  <meta name="theme-color" content="#55181b" />
   <meta name="description" content="Локальный калькулятор цен и себестоимости КАДР" />
   <link rel="manifest" href="./manifest.webmanifest" />
   <link rel="icon" href="./icon.svg?v=4" type="image/svg+xml" />
@@ -14,21 +14,22 @@
 <body>
   <div id="app">
     <header class="topbar">
-      <div class="brand"><span class="brand-mark">К</span><span><b>КАДР</b><small>PRICE OPS / LOCAL</small></span></div>
-      <span class="offline-indicator" id="network">ЛОКАЛЬНО</span>
+      <div class="brand"><span class="brand-flourish" aria-hidden="true">✦</span><span class="brand-copy"><b>КАДР</b><small>PRICE OPS · БАТУМИ</small></span><span class="brand-flourish" aria-hidden="true">✦</span></div>
+      <span class="offline-indicator" id="network"><span class="status-dot" aria-hidden="true"></span> ЛОКАЛЬНО</span>
     </header>
+    <div class="masthead" aria-hidden="true"><span class="masthead-lines">✦ · · · · · · · · · · · · · ✦</span><span class="masthead-center">КАДР <i>✦</i> ВАШИ ИДЕИ НА БУМАГЕ</span><span class="masthead-lines">✦ · · · · · · · · · · · · · ✦</span></div>
     <main class="container">
-      <div class="intro"><div><div class="eyebrow">ПЕЧАТЬ × ДИЗАЙН</div><h1 id="page-title">Калькулятор</h1><p id="page-subtitle">Быстрый расчёт заказа и маржи.</p></div><div class="date-chip">₾ GEL</div></div>
+      <div class="intro"><div><div class="eyebrow">✦ КАДР / PRICE OPS ✦</div><h1 id="page-title">Калькулятор</h1><p id="page-subtitle">Быстрый расчёт заказа и маржи.</p></div><div class="date-chip"><span class="currency-ornament">✶</span> ₾ GEL</div></div>
       <nav class="tabs" aria-label="Разделы">
-        <button class="tab active" data-page="calculator">Калькулятор</button>
-        <button class="tab" data-page="catalog">Каталог SKU</button>
-        <button class="tab" data-page="materials">Материалы</button>
-        <button class="tab" data-page="settings">Данные</button>
+        <button class="tab active" data-page="calculator"><span class="tab-icon" aria-hidden="true">▦</span> Калькулятор</button>
+        <button class="tab" data-page="catalog"><span class="tab-icon" aria-hidden="true">▤</span> Каталог SKU</button>
+        <button class="tab" data-page="materials"><span class="tab-icon" aria-hidden="true">◇</span> Материалы</button>
+        <button class="tab" data-page="settings"><span class="tab-icon" aria-hidden="true">▣</span> Данные</button>
       </nav>
       <section id="calculator" class="page active">
         <div class="layout">
           <div class="panel form-panel">
-            <div class="panel-heading"><h2>Параметры заказа</h2><span class="muted">01 / ВВОД</span></div>
+            <div class="panel-heading"><h2><span class="heading-symbol" aria-hidden="true">✧</span> ПАРАМЕТРЫ ЗАКАЗА</h2><span class="muted">01 / ВВОД</span></div>
             <label class="field"><span>Категория</span><select id="category-filter"></select></label>
             <label class="field"><span>Позиция SKU</span><select id="sku-select"></select></label>
             <div id="sku-description" class="sku-description"></div>
@@ -45,14 +46,14 @@
             <div class="form-actions"><button class="button secondary" id="reset-calculator">Сбросить расчёт</button><button class="button" id="copy-result">Скопировать итог</button></div>
           </div>
           <div class="results">
-            <div class="hero-metric"><div class="eyebrow">ПРИБЫЛЬ ОТ ЗАКАЗА</div><div class="money" id="profit-value">—</div><div id="profit-status" class="profit-status">Укажите параметры</div></div>
+            <div class="hero-metric"><span class="hero-ornament" aria-hidden="true">✦</span><div class="eyebrow">✧ ПРИБЫЛЬ ОТ ЗАКАЗА</div><div class="money" id="profit-value">—</div><div id="profit-status" class="profit-status">Укажите параметры</div></div>
             <div class="metric-grid">
               <div class="metric"><span>Выручка</span><strong id="revenue-value">—</strong></div>
               <div class="metric"><span>Маржа</span><strong id="margin-value">—</strong></div>
               <div class="metric"><span>Материалы</span><strong id="materials-value">—</strong></div>
               <div class="metric"><span>Полные затраты</span><strong id="cost-value">—</strong></div>
             </div>
-            <div class="panel breakdown"><div class="panel-heading"><h2>Структура заказа</h2><span class="muted">02 / ИТОГ</span></div>
+            <div class="panel breakdown"><div class="panel-heading"><h2><span class="heading-symbol" aria-hidden="true">✧</span> РАСШИФРОВКА ЗАКАЗА</h2><span class="muted">02 / ИТОГ</span></div>
               <div class="breakdown-row"><span>Изделий</span><b id="units-value">—</b></div>
               <div class="breakdown-row"><span>Листов на печать</span><b id="sheets-value">—</b></div>
               <div class="breakdown-row"><span>Тариф за SKU</span><b id="unit-price-value">—</b></div>
@@ -82,7 +83,7 @@
         <div class="panel info-panel"><h2>Методика расчёта</h2><p>Выручка = цена SKU × количество − скидка.</p><p>Материалы = округление количества изделий до целых листов × (бумага + чернила).</p><p>Прибыль = выручка − материалы − труд − прочие затраты.</p><p>Маржа = прибыль / выручка × 100%.</p><p class="muted">Учитывайте брак, упаковку, доставку и налоги в прочих затратах, если они оплачиваются КАДРОМ. До их ввода показатель не является чистой бухгалтерской прибылью.</p></div>
       </section>
     </main>
-    <footer>КАДР / ВАШИ ИДЕИ НА БУМАГЕ <span>v1.0</span></footer>
+    <footer><span class="footer-mark" aria-hidden="true">✦</span><span>КАДР / ВАШИ ИДЕИ НА БУМАГЕ · БАТУМИ</span><span>PRICE OPS v3</span></footer>
   </div>
   <dialog id="edit-dialog"><form method="dialog" id="edit-form"><div class="dialog-head"><h2 id="dialog-title">Редактирование</h2><button type="button" class="icon-button" id="close-dialog" aria-label="Закрыть">×</button></div><div id="dialog-fields"></div><div class="dialog-actions"><button type="button" class="button secondary" id="cancel-dialog">Отмена</button><button class="button" id="save-dialog" value="save">Сохранить</button></div></form></dialog>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
