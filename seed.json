@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "materials": [
     {
       "id": "PHOTO10",
@@ -214,8 +214,13 @@
       "units": 1,
       "material": "PHOTOA4",
       "yield": 9,
-      "price": 0.45,
+      "price": 0.6,
       "tiers": [
+        {
+          "from": 1,
+          "to": 49,
+          "price": 0.6
+        },
         {
           "from": 50,
           "to": 99,
@@ -227,7 +232,7 @@
           "price": 0.4
         }
       ],
-      "note": "До 50 шт. цена не согласована; 9 визиток с листа A4."
+      "note": "9 визиток с листа A4."
     },
     {
       "id": "CERT-A6",
@@ -237,8 +242,13 @@
       "units": 1,
       "material": "PHOTOA4",
       "yield": 4,
-      "price": 1,
+      "price": 1.5,
       "tiers": [
+        {
+          "from": 1,
+          "to": 9,
+          "price": 1.5
+        },
         {
           "from": 10,
           "to": 49,
@@ -250,7 +260,7 @@
           "price": 0.8
         }
       ],
-      "note": "Для 1–9 шт. цена не согласована. Раскладку проверить."
+      "note": "Раскладку проверить."
     },
     {
       "id": "CERT-A5",
@@ -260,8 +270,13 @@
       "units": 1,
       "material": "PHOTOA4",
       "yield": 2,
-      "price": 1.5,
+      "price": 2,
       "tiers": [
+        {
+          "from": 1,
+          "to": 9,
+          "price": 2
+        },
         {
           "from": 10,
           "to": 49,
@@ -273,7 +288,7 @@
           "price": 1.3
         }
       ],
-      "note": "Для 1–9 шт. цена не согласована. Раскладку проверить."
+      "note": "Раскладку проверить."
     },
     {
       "id": "CERT-A4",
@@ -283,8 +298,13 @@
       "units": 1,
       "material": "PHOTOA4",
       "yield": 1,
-      "price": 2,
+      "price": 2.5,
       "tiers": [
+        {
+          "from": 1,
+          "to": 9,
+          "price": 2.5
+        },
         {
           "from": 10,
           "to": 49,
@@ -296,7 +316,7 @@
           "price": 1.7
         }
       ],
-      "note": "Для 1–9 шт. цена не согласована."
+      "note": ""
     },
     {
       "id": "CARD-A6",
@@ -310,7 +330,7 @@
       "tiers": [
         {
           "from": 1,
-          "to": 1,
+          "to": 4,
           "price": 3
         },
         {
@@ -322,24 +342,6 @@
           "from": 10,
           "to": null,
           "price": 1.5
-        }
-      ],
-      "note": "Для 2–4 шт. цена не согласована."
-    },
-    {
-      "id": "DS-ST-AD",
-      "category": "Дизайн",
-      "name": "Стикеры · адаптация",
-      "unit": "услуга",
-      "units": 1,
-      "material": "NONE",
-      "yield": 1,
-      "price": 5,
-      "tiers": [
-        {
-          "from": 1,
-          "to": null,
-          "price": 5
         }
       ],
       "note": ""
@@ -363,42 +365,6 @@
       "note": ""
     },
     {
-      "id": "DS-AD",
-      "category": "Дизайн",
-      "name": "Дизайн · адаптация макета",
-      "unit": "услуга",
-      "units": 1,
-      "material": "NONE",
-      "yield": 1,
-      "price": 20,
-      "tiers": [
-        {
-          "from": 1,
-          "to": null,
-          "price": 20
-        }
-      ],
-      "note": ""
-    },
-    {
-      "id": "DS-NEW",
-      "category": "Дизайн",
-      "name": "Дизайн · простой с нуля",
-      "unit": "услуга",
-      "units": 1,
-      "material": "NONE",
-      "yield": 1,
-      "price": 30,
-      "tiers": [
-        {
-          "from": 1,
-          "to": null,
-          "price": 30
-        }
-      ],
-      "note": ""
-    },
-    {
       "id": "DS-CUSTOM",
       "category": "Дизайн",
       "name": "Индивидуальный дизайн · от 30 ₾",
@@ -415,24 +381,6 @@
         }
       ],
       "note": "Согласовать 30–200 ₾; можно изменить тариф."
-    },
-    {
-      "id": "CANVAS",
-      "category": "Подарки",
-      "name": "Авторский холст · от 100 ₾",
-      "unit": "заказ",
-      "units": 1,
-      "material": "NONE",
-      "yield": 1,
-      "price": 100,
-      "tiers": [
-        {
-          "from": 1,
-          "to": null,
-          "price": 100
-        }
-      ],
-      "note": "Обязательно вручную внесите стоимость холста, краски и других материалов."
     }
   ]
 }

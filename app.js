@@ -31,7 +31,7 @@ function valid(data){
   for(let i=1;i<tiers.length;i++)if(tiers[i-1].to===null||tiers[i-1].to>=tiers[i].from)throw Error('Пересечение тарифов '+s.id);
   return {id:String(s.id),category:String(s.category),name:String(s.name),unit:String(s.unit||'шт.'),units:Number(s.units),yield:Number(s.yield),material:String(s.material||'NONE'),tiers,price:tiers[0].price,note:String(s.note||'')};
  });
- return {version:2,materials,skus}
+ return {version:3,materials,skus}
 }
 const sku=()=>state.skus.find(s=>s.id===selected);
 const categoryList=()=>[...new Set(state.skus.map(x=>x.category))].sort((a,b)=>a.localeCompare(b,'ru'));
@@ -43,8 +43,8 @@ function materialCalc(s,q){
  if(!m||m.sheetCost===null)return {cost:NaN,sheets,unknown:true};
  return {cost:sheets*(m.sheetCost+m.inkCost),sheets,unknown:false}
 }
-function calc(s,q,discount,labor,extra){
- const price=tariff(s,q),mat=materialCalc(s,q),revenue=price===null?NaN:price*q-discount;
+function calc(s,q,discount,labor,extra,customPrice=null){
+ const price=s.id==='DS-CUSTOM'&&customPrice!==null?customPrice:tariff(s,q),mat=materialCalc(s,q),revenue=price===null?NaN:price*q-discount;
  const total=mat.cost+labor+extra,profit=revenue-total;
  return {...mat,price,units:s.units*q,revenue,total,profit,margin:revenue>0?profit/revenue*100:NaN}
 }
@@ -62,13 +62,19 @@ function renderSKU(){
  const list=state.skus.filter(s=>!category||s.category===category);
  options($('sku-select'),list.map(s=>[s.id,s.name]),selected);
  selected=$('sku-select').value||'';
- update()
+ toggleCustomPrice();update()
+}
+function toggleCustomPrice(){
+ const custom=sku()?.id==='DS-CUSTOM';
+ $('custom-price-wrap').hidden=!custom;
+ if(custom && $('custom-price').value==='')$('custom-price').value=tariff(sku(),1)??30;
 }
 function update(){
  const s=sku();if(!s){$('sku-description').textContent='Добавьте SKU в каталоге';return}
  const q=count($('quantity').value),discount=nonneg($('discount').value),labor=nonneg($('labor').value),extra=nonneg($('extras').value);
- const r=calc(s,q,discount,labor,extra);
- $('sku-description').textContent=s.id+' • '+s.units+' изд. / SKU • '+tariffLabel(s)+(s.note?' • '+s.note:'');
+ const customPrice=s.id==='DS-CUSTOM'?number($('custom-price').value):null;
+ const r=calc(s,q,discount,labor,extra,customPrice===null?null:(Number.isFinite(customPrice)&&customPrice>=0?customPrice:NaN));
+ $('sku-description').textContent=s.id+' • '+s.units+' изд. / SKU • '+(s.id==='DS-CUSTOM'?'индивидуальная цена задаётся ниже':tariffLabel(s))+(s.note?' • '+s.note:'');
  $('revenue-value').textContent=money(r.revenue);
  $('materials-value').textContent=money(r.cost);
  $('cost-value').textContent=money(r.total);
@@ -80,8 +86,9 @@ function update(){
  $('overhead-value').textContent=money(labor+extra);
  $('discount-value').textContent=money(discount);
  $('profit-value').classList.toggle('negative',Number.isFinite(r.profit)&&r.profit<0);
- $('profit-status').textContent=r.price===null?'Тариф не утверждён':r.unknown?'Материал без закупочной цены':r.revenue<=0?'Скидка слишком большая':r.profit<0?'Убыточный заказ':r.margin<20?'Низкая маржа':'Расчёт готов';
+ $('profit-status').textContent=s.id==='DS-CUSTOM'&&(!Number.isFinite(customPrice)||customPrice<0)?'Укажите розничную цену':r.price===null?'Тариф не утверждён':r.unknown?'Материал без закупочной цены':r.revenue<=0?'Скидка слишком большая':r.profit<0?'Убыточный заказ':r.margin<20?'Низкая маржа':'Расчёт готов';
  const warnings=[];
+ if(s.id==='DS-CUSTOM'&&(!Number.isFinite(customPrice)||customPrice<0))warnings.push('Введите корректную розничную цену индивидуального дизайна.');
  if(r.price===null)warnings.push('Для выбранного количества пока нет утверждённого тарифа. Измените количество или задайте тариф в каталоге.');
  if(r.unknown)warnings.push('Неизвестна цена бумаги '+s.material+'. Внесите стоимость одного листа в разделе «Материалы».');
  if(Number.isFinite(r.revenue)&&r.revenue<=0)warnings.push('Скидка обнуляет или превышает выручку.');
@@ -103,7 +110,7 @@ function renderMaterials(){
 function page(p){
  document.querySelectorAll('.page').forEach(el=>el.classList.toggle('active',el.id===p));
  document.querySelectorAll('.tab').forEach(el=>el.classList.toggle('active',el.dataset.page===p));
- const labels={calculator:['Калькулятор','Цена автоматически зависит от количества.'],catalog:['Каталог SKU','20 позиций, редактируемые тарифы по тиражам.'],materials:['Материалы','Расход листов и чернил.'],settings:['Данные','Локальные копии и восстановление.']};
+ const labels={calculator:['Калькулятор','Цена автоматически зависит от количества.'],catalog:['Каталог SKU','16 позиций, редактируемые тарифы по тиражам.'],materials:['Материалы','Расход листов и чернил.'],settings:['Данные','Локальные копии и восстановление.']};
  $('page-title').textContent=labels[p][0];$('page-subtitle').textContent=labels[p][1];
  if(p==='catalog')renderCatalog();if(p==='materials')renderMaterials()
 }
@@ -182,7 +189,7 @@ async function importFile(file){
  try{
  if(file.size>5*1024*1024)throw Error('Файл превышает 5 МБ');
  const incoming=valid(JSON.parse(await file.text()));
- if(!confirm('Заменить текущие 20 SKU и материалы данными из файла?'))return;
+ if(!confirm('Заменить текущий каталог и материалы данными из файла?'))return;
  await db.put(structuredClone(state),'before-import-v2');
  state=incoming;await db.put(state);selected=state.skus[0]?.id||'';
  renderCategories();renderSKU();renderCatalog();renderMaterials();notify('Данные восстановлены');
@@ -192,11 +199,11 @@ async function importFile(file){
 function events(){
  document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>page(b.dataset.page)));
  $('category-filter').addEventListener('change',renderSKU);
- $('sku-select').addEventListener('change',e=>{selected=e.target.value;update()});
- ['quantity','discount','labor','extras'].forEach(k=>$(k).addEventListener('input',update));
+ $('sku-select').addEventListener('change',e=>{selected=e.target.value;toggleCustomPrice();update()});
+ ['quantity','discount','labor','extras','custom-price'].forEach(k=>$(k).addEventListener('input',update));
  $('reset-calculator').addEventListener('click',()=>{['discount','labor','extras'].forEach(k=>$(k).value=0);$('quantity').value=1;update()});
  $('copy-result').addEventListener('click',async()=>{
- const s=sku(),r=calc(s,count($('quantity').value),nonneg($('discount').value),nonneg($('labor').value),nonneg($('extras').value));
+ const s=sku(),r=calc(s,count($('quantity').value),nonneg($('discount').value),nonneg($('labor').value),nonneg($('extras').value),s.id==='DS-CUSTOM'?number($('custom-price').value):null);
  const txt='КАДР / '+s.name+' × '+$('quantity').value+'\nЦена: '+money(r.price)+'\nВыручка: '+money(r.revenue)+'\nМатериалы: '+money(r.cost)+'\nРабота: '+money(nonneg($('labor').value))+'\nПрочие: '+money(nonneg($('extras').value))+'\nПрибыль: '+money(r.profit)+'\nМаржа: '+pct(r.margin);
  try{await navigator.clipboard.writeText(txt);notify('Расчёт скопирован')}catch{notify('Копирование недоступно')}
  });
@@ -214,17 +221,29 @@ async function main(){
  const response=await fetch('./seed.json',{cache:'no-store'});if(!response.ok)throw Error('Не загружен каталог');
  defaults=valid(await response.json());
  const stored=await db.get();
- if(stored?.version===2)state=valid(stored);
- else{
+ if(stored?.version===3)state=valid(stored);
+ else if(stored?.version===2){
+  await db.put(stored,'legacy-v2');
+  const old=valid(stored);
+  const changes=new Set(['BUS','CERT-A6','CERT-A5','CERT-A4','CARD-A6','DS-CUSTOM']);
+  const toRemove=new Set(['DS-ST-AD','DS-AD','DS-NEW','CANVAS']);
+  state={version:3,materials:old.materials,skus:old.skus.filter(s=>!toRemove.has(s.id)).map(s=>{
+    const updated=defaults.skus.find(d=>d.id===s.id);
+    return updated&&changes.has(s.id)?{...s,tiers:structuredClone(updated.tiers),price:updated.price,note:updated.note}:s;
+  })};
+  await db.put(state);
+ }else{
   if(stored)await db.put(stored,'legacy-v1');
   state=structuredClone(defaults);await db.put(state);
  }
  events();renderCategories();renderSKU();renderCatalog();renderMaterials();
- const legacy=await db.get('legacy-v1');
- if(legacy){
-  const box=document.querySelector('#settings .panel');
-  const b=document.createElement('button');b.className='button secondary';b.textContent='Скачать старый каталог v1 (резерв)';
-  b.addEventListener('click',()=>download(legacy,'KADR_OLD_CATALOG_V1.json'));box.appendChild(b)
+ for(const version of [1,2]){
+  const legacy=await db.get('legacy-v'+version);
+  if(legacy){
+   const box=document.querySelector('#settings .panel');
+   const b=document.createElement('button');b.className='button secondary';b.textContent='Скачать старый каталог v'+version+' (резерв)';
+   b.addEventListener('click',()=>download(legacy,'KADR_OLD_CATALOG_V'+version+'.json'));box.appendChild(b)
+  }
  }
  }catch(e){document.querySelector('main').innerHTML='<div class="panel"><h2>Ошибка загрузки</h2><p>'+esc(e.message)+'</p></div>'}
 }
