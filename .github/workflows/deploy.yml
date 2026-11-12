@@ -18,6 +18,15 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
+      - name: Generate PWA icons
+        run: |
+          python3 -m venv /tmp/kadr-icons-venv
+          /tmp/kadr-icons-venv/bin/pip install cairosvg
+          /tmp/kadr-icons-venv/bin/python - <<'PY'
+          import cairosvg
+          for size, name in [(192,'icon-192.png'),(512,'icon-512.png'),(180,'apple-touch-icon.png')]:
+              cairosvg.svg2png(url='icon.svg',write_to=name,output_width=size,output_height=size)
+          PY
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

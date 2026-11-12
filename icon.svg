@@ -1,1 +1,32 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><rect width="512" height="512" rx="116" fill="#101315"/><rect x="39" y="39" width="434" height="434" rx="86" fill="none" stroke="#d5f06b" stroke-width="17"/><text x="256" y="354" text-anchor="middle" font-family="Georgia,serif" font-size="304" font-weight="bold" fill="#f1f2e9">К</text><circle cx="418" cy="108" r="20" fill="#d5f06b"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="КАДР">
+<defs>
+<linearGradient id="paper" x2="1" y2="1"><stop stop-color="#f4e2c6"/><stop offset=".55" stop-color="#e8cba5"/><stop offset="1" stop-color="#cba882"/></linearGradient>
+<linearGradient id="wine" x2="0" y2="1"><stop stop-color="#5c1014"/><stop offset="1" stop-color="#36090d"/></linearGradient>
+<pattern id="cloth" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M0 12l12-12 12 12-12 12z" fill="none" stroke="#e6b281" stroke-width="1" opacity=".24"/><circle cx="12" cy="12" r="3" fill="#a94d38" opacity=".35"/></pattern>
+<filter id="grain"><feTurbulence type="fractalNoise" baseFrequency=".62" numOctaves="3" stitchTiles="stitch" result="n"/><feColorMatrix in="n" type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope=".11"/></feComponentTransfer><feBlend in="SourceGraphic" mode="multiply"/></filter>
+</defs>
+<rect width="512" height="512" rx="90" fill="url(#paper)"/>
+<path d="M0 0H183L117 69 0 109zM420 0H512V173L456 123 483 48zM0 400L100 459 159 512H0zM512 341V512H360l51-68z" fill="url(#wine)"/>
+<path d="M0 0H183L117 69 0 109zM420 0H512V173L456 123 483 48zM0 400L100 459 159 512H0zM512 341V512H360l51-68z" fill="url(#cloth)"/>
+<g fill="none" stroke="#591316" stroke-width="8" stroke-linecap="round"><path d="M125 173v-43q0-15 15-15h43M329 115h42q15 0 15 15v43M125 339v42q0 15 15 15h43M329 396h42q15 0 15-15v-42"/></g>
+<g fill="#631319">
+<path d="M256 54l9 19 20 8-20 9-9 18-9-18-20-9 20-8z"/>
+<path d="M256 63c-22 13-25 28-17 32 7 4 15-3 17-9 2 6 10 13 17 9 8-4 5-19-17-32z" opacity=".85"/>
+<path d="M440 237l6 15 15 6-15 6-6 15-6-15-15-6 15-6z"/>
+</g>
+<text x="256" y="352" text-anchor="middle" font-family="Georgia,'Times New Roman',serif" font-size="286" font-weight="700" letter-spacing="-15" fill="url(#wine)">К</text>
+<g transform="translate(56 346)" stroke="#3a1815" stroke-width="2" fill="none">
+<path d="M0 80Q-5 45 19 33Q13 13 30 5Q42 12 40 29Q62 34 62 62Q62 103 30 110Q5 109 0 80z" fill="#9c382c"/>
+<path d="M20 32l-7-21 16 9 9-15 2 25" fill="#6f2420"/>
+<circle cx="20" cy="72" r="7" fill="#44151a"/><circle cx="35" cy="69" r="7" fill="#44151a"/><circle cx="18" cy="87" r="7" fill="#44151a"/><circle cx="34" cy="86" r="7" fill="#44151a"/><circle cx="47" cy="80" r="7" fill="#44151a"/>
+<path d="M38 43Q58 5 90-1M45 46Q85 47 109 22" stroke="#2c3022" stroke-width="5"/>
+<path d="M80 2q-21 3-28 26 25-2 28-26zM102 27q-25-4-37 13 30 12 37-13z" fill="#343a2e"/>
+</g>
+<g transform="rotate(-11 430 421)">
+<rect x="355" y="373" width="123" height="88" fill="#ddc09b" stroke="#5b2a20" stroke-width="4"/>
+<path d="M365 449l24-29 18 16 26-38 36 51z" fill="#423e32"/><path d="M365 447h104" stroke="#5b2a20" stroke-width="3"/>
+<path d="M411 398v-13m-8 14h16" stroke="#4f372a" stroke-width="3"/>
+</g>
+<rect width="512" height="512" rx="90" fill="none" stroke="#3a0f10" stroke-width="10"/>
+<rect width="512" height="512" rx="90" fill="none" stroke="#f7e6c8" stroke-width="7" opacity=".35"/>
+</svg>
