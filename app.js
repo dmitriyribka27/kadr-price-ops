@@ -117,13 +117,58 @@ function page(p){
 function field(name,title,value,type='text',extra=''){
  return '<label class="dialog-field"><span>'+esc(title)+'</span><input class="dialog-input" name="'+name+'" type="'+type+'" value="'+esc(value??'')+'" '+extra+' /></label>'
 }
+function tierRow(t={from:1,to:null,price:0}){
+ return '<div class="tier-row">'+
+   '<label><span>От, шт.</span><input class="dialog-input tier-from" type="number" min="1" step="1" inputmode="numeric" required value="'+esc(t.from)+'"></label>'+
+   '<label><span>До, шт.</span><input class="dialog-input tier-to" type="number" min="1" step="1" inputmode="numeric" placeholder="∞" value="'+esc(t.to??'')+'"></label>'+
+   '<label><span>₾ / SKU</span><input class="dialog-input tier-price" type="number" min="0" step="0.01" inputmode="decimal" required value="'+esc(t.price)+'"></label>'+
+   '<button type="button" class="tier-remove" aria-label="Удалить тариф" title="Удалить тариф">×</button>'+
+ '</div>'
+}
+function addTierRow(){
+ const box=$('tier-rows'),rows=Array.from(box.querySelectorAll('.tier-row'));
+ let from=1;
+ if(rows.length){
+  const prev=rows[rows.length-1],fromInput=prev.querySelector('.tier-from'),toInput=prev.querySelector('.tier-to');
+  const start=Number(fromInput.value)||1,end=Number(toInput.value);
+  if(toInput.value===''){
+   // Leave a one-unit first range so an unlimited final tier can be appended.
+   toInput.value=String(start);from=start+1;
+  }else from=Math.max(start,end)+1;
+ }
+ box.insertAdjacentHTML('beforeend',tierRow({from,to:null,price:0}));
+ box.lastElementChild.querySelector('.tier-price').focus();
+ updateTierRemoveButtons();
+}
+function updateTierRemoveButtons(){
+ const rows=$('tier-rows')?.querySelectorAll('.tier-row')||[];
+ rows.forEach(row=>{row.querySelector('.tier-remove').disabled=rows.length===1});
+}
+function parseTierRows(){
+ const rows=Array.from($('tier-rows')?.querySelectorAll('.tier-row')||[]);
+ if(!rows.length)throw Error('Добавьте хотя бы один тариф');
+ const arr=rows.map(row=>{
+  const fromText=row.querySelector('.tier-from').value.trim();
+  const toText=row.querySelector('.tier-to').value.trim();
+  const priceText=row.querySelector('.tier-price').value.trim();
+  const from=Number(fromText),to=toText===''?null:Number(toText),price=Number(priceText);
+  if(!fromText||!Number.isSafeInteger(from)||from<1)throw Error('Укажите количество «От» — целое число от 1');
+  if(to!==null&&(!Number.isSafeInteger(to)||to<from))throw Error('Количество «До» не может быть меньше «От»');
+  if(priceText===''||!Number.isFinite(price)||price<0)throw Error('Укажите корректную цену за SKU');
+  return {from,to,price};
+ }).sort((a,b)=>a.from-b.from);
+ for(let i=1;i<arr.length;i++){
+  if(arr[i-1].to===null)throw Error('Диапазон без верхней границы может быть только последним');
+  if(arr[i-1].to>=arr[i].from)throw Error('Диапазоны тарифов пересекаются. Проверьте «От» и «До»');
+ }
+ return arr;
+}
 function openDialog(kind,id){
  editing={kind,id};const obj=(kind==='sku'?state.skus:state.materials).find(x=>x.id===id);
  $('dialog-title').textContent=(obj?'Изменить ':'Добавить ')+(kind==='sku'?'SKU':'материал');
  let content='';
  if(kind==='sku'){
  const s=obj||{id:'',name:'',category:'',unit:'шт.',units:1,price:0,yield:1,material:'NONE',tiers:[{from:1,to:null,price:0}],note:''};
- const text=s.tiers.map(t=>(t.to===null?t.from+'+':t.from===t.to?t.from:t.from+'-'+t.to)+':'+t.price).join(';');
  content=field('id','Уникальный код SKU',s.id,'text',obj?'readonly':'required')+
  field('category','Категория',s.category,'text','required')+
  field('name','Название',s.name,'text','required')+
@@ -131,7 +176,7 @@ function openDialog(kind,id){
  field('units','Изделий в одном SKU',s.units,'number','min="1" step="1" required')+
  field('yield','Изделий с листа',s.yield,'number','min="1" step="1" required')+
  '<label class="dialog-field"><span>Материал</span><select class="dialog-input" name="material"><option value="NONE">Без материалов</option>'+state.materials.map(m=>'<option value="'+esc(m.id)+'" '+(s.material===m.id?'selected':'')+'>'+esc(m.name)+'</option>').join('')+'</select></label>'+
- field('tiers','Тарифы (пример: 1-49:0.5;50+:0.45)',text,'text','required')+
+ '<section class="tier-editor" aria-label="Тарифы по количеству"><div class="tier-header"><div><strong>Тарифы по количеству</strong><small>Пустое поле «До» = без ограничения</small></div><button type="button" class="button secondary tier-add" id="add-tier">+ Тариф</button></div><div id="tier-rows">'+s.tiers.map(tierRow).join('')+'</div><p class="tier-hint">Цена применяется ко всем SKU в заказе, когда количество попадает в диапазон.</p></section>'+
  field('note','Примечание',s.note);
  }else{
  const m=obj||{id:'',name:'',sheetCost:null,inkCost:0,note:''};
@@ -139,19 +184,7 @@ function openDialog(kind,id){
  field('sheetCost','Бумага за лист, ₾ (пусто = неизвестно)',m.sheetCost,'number','min="0" step="0.001"')+
  field('inkCost','Чернила за лист, ₾',m.inkCost,'number','min="0" step="0.001" required')+field('note','Примечание',m.note)
  }
- $('dialog-fields').innerHTML=content;$('edit-dialog').showModal()
-}
-function parseTiers(source){
- const arr=source.split(';').map(x=>x.trim()).filter(Boolean).map(x=>{
- const m=x.match(/^(\d+)(?:-(\d+)|\+)?\s*:\s*(\d+(?:[.,]\d+)?)$/);
- if(!m)throw Error('Неверный формат. Пример: 1-49:0.5;50+:0.45');
- const from=Number(m[1]),to=m[2]?Number(m[2]):x.includes('+')?null:from,price=Number(m[3].replace(',','.'));
- if(from<1||to!==null&&to<from||price<0)throw Error('Проверьте диапазоны и цены');
- return {from,to,price}
- }).sort((a,b)=>a.from-b.from);
- if(!arr.length)throw Error('Добавьте тариф');
- for(let i=1;i<arr.length;i++)if(arr[i-1].to===null||arr[i-1].to>=arr[i].from)throw Error('Диапазоны пересекаются');
- return arr
+ $('dialog-fields').innerHTML=content;if(kind==='sku')updateTierRemoveButtons();$('edit-dialog').showModal()
 }
 function saveDialog(e){
  e.preventDefault();
@@ -161,7 +194,7 @@ function saveDialog(e){
  const index=collection.findIndex(x=>x.id===editing.id);
  let item;
  if(editing.kind==='sku'){
-  const tiers=parseTiers(values.tiers);
+  const tiers=parseTierRows();
   item={id:values.id.trim(),name:values.name.trim(),category:values.category.trim(),unit:values.unit.trim(),units:count(values.units),yield:count(values.yield),material:values.material,tiers,price:tiers[0].price,note:values.note||''};
  }else{
   item={id:values.id.trim(),name:values.name.trim(),sheetCost:values.sheetCost===''?null:nonneg(values.sheetCost),inkCost:nonneg(values.inkCost),note:values.note||''}
@@ -211,6 +244,15 @@ function events(){
  $('add-sku').addEventListener('click',()=>openDialog('sku'));$('add-material').addEventListener('click',()=>openDialog('material'));
  $('sku-table').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;if(b.dataset.edit)openDialog('sku',b.dataset.edit);if(b.dataset.remove)remove('sku',b.dataset.remove)});
  $('materials-list').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;if(b.dataset.medit)openDialog('material',b.dataset.medit);if(b.dataset.mremove)remove('material',b.dataset.mremove)});
+ $('dialog-fields').addEventListener('click',e=>{
+   if(e.target.closest('#add-tier')){addTierRow();return}
+   const removeButton=e.target.closest('.tier-remove');
+   if(removeButton){
+     const rows=$('tier-rows').querySelectorAll('.tier-row');
+     if(rows.length<=1){notify('Нужен хотя бы один тариф');return}
+     removeButton.closest('.tier-row').remove();updateTierRemoveButtons();
+   }
+ });
  $('edit-form').addEventListener('submit',saveDialog);$('close-dialog').addEventListener('click',()=>$('edit-dialog').close());$('cancel-dialog').addEventListener('click',()=>$('edit-dialog').close());
  $('export-data').addEventListener('click',()=>{download(state,'KADR_BACKUP_'+new Date().toISOString().slice(0,10)+'.json');notify('Копия сохранена')});
  $('import-data').addEventListener('change',e=>importFile(e.target.files[0]));
