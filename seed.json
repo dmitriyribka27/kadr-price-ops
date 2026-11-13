@@ -1,26 +1,110 @@
 {
-  "version": 3,
-  "materials": [
+  "version": 4,
+  "sourceRevision": "google-sheet-2026-11-14",
+  "sourceUrl": "https://docs.google.com/spreadsheets/d/1nSzupuFxqx2JImjR7eXQmKTP2uWS6wok9hXCI23-n4k/edit",
+  "inkProfiles": [
     {
-      "id": "PHOTO10",
-      "name": "Фотобумага 10×15",
-      "sheetCost": null,
-      "inkCost": 0.1,
-      "note": "Закупочная цена листа неизвестна. Заполните для расчёта прибыли."
+      "id": "BW",
+      "name": "Ч/б документ",
+      "cost": 0.0105,
+      "note": "ISO, приближённо"
     },
     {
-      "id": "PHOTOA4",
-      "name": "Фотобумага A4 глянцевая",
-      "sheetCost": 0.225,
-      "inkCost": 0.2,
-      "note": "Ориентир 200 г/м²; подача бумаги требует теста."
+      "id": "COLOR",
+      "name": "Цветной документ",
+      "cost": 0.028874999999999998,
+      "note": "CMY/6000 + доля чёрного"
+    },
+    {
+      "id": "P10PHOTO",
+      "name": "Фото 10×15",
+      "cost": 0.1,
+      "note": "Норматив КАДРА, не замерен"
+    },
+    {
+      "id": "A4PHOTO",
+      "name": "Фото A4",
+      "cost": 0.2,
+      "note": "Норматив КАДРА, не замерен"
     },
     {
       "id": "STICKER",
-      "name": "Самоклеящаяся бумага A4",
+      "name": "Стикер A4",
+      "cost": 0.2,
+      "note": "Норматив КАДРА, не замерен"
+    },
+    {
+      "id": "NONE",
+      "name": "Без печати",
+      "cost": 0,
+      "note": "Материалы не учитываются"
+    }
+  ],
+  "materials": [
+    {
+      "id": "A4OFF",
+      "name": "Офисная бумага",
+      "format": "A4",
+      "gsm": 80,
+      "packSize": 500,
+      "packCost": 7.99,
+      "sheetCost": 0.01598,
+      "inkCost": 0,
+      "status": "Факт Анна",
+      "source": "Внутренний учёт 14.11.2026",
+      "note": "Документы"
+    },
+    {
+      "id": "P10",
+      "name": "NARSURN Glossy Photo",
+      "format": "10×15",
+      "gsm": 230,
+      "packSize": 100,
+      "packCost": 7,
+      "sheetCost": 0.07,
+      "inkCost": 0,
+      "status": "Подтверждено Дмитрием",
+      "source": "Закупка КАДР, сообщение 14.11.2026",
+      "note": "Основная фотопечать"
+    },
+    {
+      "id": "A4P",
+      "name": "Glossy Photo 200, кандидат",
+      "format": "A4",
+      "gsm": 200,
+      "packSize": 20,
+      "packCost": 4.5,
+      "sheetCost": 0.225,
+      "inkCost": 0,
+      "status": "Ориентир",
+      "source": "https://www.legacy.ge/public/en/products?category_id=224",
+      "note": "Бумагу проверить на HP"
+    },
+    {
+      "id": "A4ST",
+      "name": "NARSURN Glued Glossy",
+      "format": "A4",
+      "gsm": 135,
+      "packSize": 50,
+      "packCost": 15,
       "sheetCost": 0.3,
-      "inkCost": 0.2,
-      "note": "Ориентир; уточните цену закупки."
+      "inkCost": 0,
+      "status": "Оценка",
+      "source": "Предварительный ориентир КАДРА",
+      "note": "Стикеры"
+    },
+    {
+      "id": "A4HEAVY",
+      "name": "NARSURN Glossy 240",
+      "format": "A4",
+      "gsm": 240,
+      "packSize": 50,
+      "packCost": null,
+      "sheetCost": null,
+      "inkCost": 0,
+      "status": "Тест не пройден",
+      "source": "Собственные пробы",
+      "note": "Не использовать для расчётов"
     }
   ],
   "skus": [
@@ -30,8 +114,12 @@
       "name": "Фото 10×15",
       "unit": "шт.",
       "units": 1,
-      "material": "PHOTO10",
       "yield": 1,
+      "material": "P10",
+      "inkProfile": "P10PHOTO",
+      "sides": 1,
+      "status": "в работе",
+      "note": "Фотобумага 230 г/м², 7 ₾ за 100 листов",
       "price": 0.5,
       "tiers": [
         {
@@ -44,17 +132,20 @@
           "to": null,
           "price": 0.45
         }
-      ],
-      "note": ""
+      ]
     },
     {
       "id": "PHA4",
       "category": "Фотопечать",
-      "name": "Фото А4",
+      "name": "Фото A4",
       "unit": "шт.",
       "units": 1,
-      "material": "PHOTOA4",
       "yield": 1,
+      "material": "A4P",
+      "inkProfile": "A4PHOTO",
+      "sides": 1,
+      "status": "тест",
+      "note": "Глянец 200 г/м² ориентир",
       "price": 2,
       "tiers": [
         {
@@ -67,17 +158,20 @@
           "to": null,
           "price": 1.8
         }
-      ],
-      "note": ""
+      ]
     },
     {
       "id": "POL",
       "category": "Polaroid",
-      "name": "Polaroid",
+      "name": "Полароид",
       "unit": "шт.",
       "units": 1,
-      "material": "PHOTO10",
       "yield": 2,
+      "material": "P10",
+      "inkProfile": "P10PHOTO",
+      "sides": 1,
+      "status": "в работе",
+      "note": "Две фотографии на лист",
       "price": 2,
       "tiers": [
         {
@@ -90,17 +184,20 @@
           "to": null,
           "price": 1.5
         }
-      ],
-      "note": "2 полароида на одном листе 10×15."
+      ]
     },
     {
       "id": "STR-CLASSIC",
       "category": "Фотополоски",
-      "name": "Классическая · 2 полоски по 4 кадра",
+      "name": "Classic, 2 полоски по 4 кадра",
       "unit": "комплект",
       "units": 2,
-      "material": "PHOTO10",
       "yield": 2,
+      "material": "P10",
+      "inkProfile": "P10PHOTO",
+      "sides": 1,
+      "status": "в работе",
+      "note": "Комплект на лист",
       "price": 1.5,
       "tiers": [
         {
@@ -108,17 +205,20 @@
           "to": null,
           "price": 1.5
         }
-      ],
-      "note": "Один комплект = один лист 10×15."
+      ]
     },
     {
       "id": "STR-MINI",
       "category": "Фотополоски",
-      "name": "Mini · 3 полоски по 3 кадра",
+      "name": "Mini, 3 полоски по 3 кадра",
       "unit": "комплект",
       "units": 3,
-      "material": "PHOTO10",
       "yield": 3,
+      "material": "P10",
+      "inkProfile": "P10PHOTO",
+      "sides": 1,
+      "status": "в работе",
+      "note": "Комплект на лист",
       "price": 1.5,
       "tiers": [
         {
@@ -126,17 +226,20 @@
           "to": null,
           "price": 1.5
         }
-      ],
-      "note": "Один комплект = один лист 10×15."
+      ]
     },
     {
       "id": "MINI6",
       "category": "Мини-фото",
-      "name": "Мини-фото 50×50 · комплект 6 шт.",
+      "name": "Мини-фото 50×50, комплект 6",
       "unit": "комплект",
       "units": 6,
-      "material": "PHOTO10",
       "yield": 6,
+      "material": "P10",
+      "inkProfile": "P10PHOTO",
+      "sides": 1,
+      "status": "в работе",
+      "note": "Только комплект 6 шт.",
       "price": 2,
       "tiers": [
         {
@@ -144,17 +247,20 @@
           "to": null,
           "price": 2
         }
-      ],
-      "note": "Комплект 6 мини-фото с одного 10×15."
+      ]
     },
     {
       "id": "ST-A4",
       "category": "Стикеры",
-      "name": "Стикер-лист А4 без резки",
+      "name": "Стикер-лист A4",
       "unit": "лист",
       "units": 1,
-      "material": "STICKER",
       "yield": 1,
+      "material": "A4ST",
+      "inkProfile": "STICKER",
+      "sides": 1,
+      "status": "тест",
+      "note": "Без резки",
       "price": 3,
       "tiers": [
         {
@@ -167,17 +273,20 @@
           "to": null,
           "price": 2
         }
-      ],
-      "note": ""
+      ]
     },
     {
       "id": "ST-PACK-S",
       "category": "Стикеры",
-      "name": "Стикер-пак · простая форма",
+      "name": "Стикер-пак простая резка",
       "unit": "лист",
       "units": 1,
-      "material": "STICKER",
       "yield": 1,
+      "material": "A4ST",
+      "inkProfile": "STICKER",
+      "sides": 1,
+      "status": "тест",
+      "note": "Резка включена",
       "price": 5,
       "tiers": [
         {
@@ -185,17 +294,20 @@
           "to": null,
           "price": 5
         }
-      ],
-      "note": "Цена за лист с ручной резкой, труд вносится отдельно в калькуляторе."
+      ]
     },
     {
       "id": "ST-PACK-C",
       "category": "Стикеры",
-      "name": "Стикер-пак · сложная форма",
+      "name": "Стикер-пак сложная резка",
       "unit": "лист",
       "units": 1,
-      "material": "STICKER",
       "yield": 1,
+      "material": "A4ST",
+      "inkProfile": "STICKER",
+      "sides": 1,
+      "status": "тест",
+      "note": "Резка включена",
       "price": 7,
       "tiers": [
         {
@@ -203,17 +315,20 @@
           "to": null,
           "price": 7
         }
-      ],
-      "note": "Цена за лист с ручной резкой, труд вносится отдельно в калькуляторе."
+      ]
     },
     {
       "id": "BUS",
       "category": "Визитки",
-      "name": "Визитки · 90×50 мм",
+      "name": "Визитки",
       "unit": "шт.",
       "units": 1,
-      "material": "PHOTOA4",
       "yield": 9,
+      "material": "A4P",
+      "inkProfile": "A4PHOTO",
+      "sides": 1,
+      "status": "тест",
+      "note": "9 шт. на A4",
       "price": 0.6,
       "tiers": [
         {
@@ -231,17 +346,20 @@
           "to": null,
           "price": 0.4
         }
-      ],
-      "note": "9 визиток с листа A4."
+      ]
     },
     {
       "id": "CERT-A6",
       "category": "Сертификаты / флаеры",
-      "name": "Сертификаты / флаеры A6",
+      "name": "Сертификат / флаер A6",
       "unit": "шт.",
       "units": 1,
-      "material": "PHOTOA4",
       "yield": 4,
+      "material": "A4P",
+      "inkProfile": "A4PHOTO",
+      "sides": 1,
+      "status": "тест",
+      "note": "Раскладку под обрез проверить",
       "price": 1.5,
       "tiers": [
         {
@@ -259,17 +377,20 @@
           "to": null,
           "price": 0.8
         }
-      ],
-      "note": "Раскладку проверить."
+      ]
     },
     {
       "id": "CERT-A5",
       "category": "Сертификаты / флаеры",
-      "name": "Сертификаты / флаеры A5",
+      "name": "Сертификат / флаер A5",
       "unit": "шт.",
       "units": 1,
-      "material": "PHOTOA4",
       "yield": 2,
+      "material": "A4P",
+      "inkProfile": "A4PHOTO",
+      "sides": 1,
+      "status": "тест",
+      "note": "2 шт. с листа",
       "price": 2,
       "tiers": [
         {
@@ -287,17 +408,20 @@
           "to": null,
           "price": 1.3
         }
-      ],
-      "note": "Раскладку проверить."
+      ]
     },
     {
       "id": "CERT-A4",
       "category": "Сертификаты / флаеры",
-      "name": "Сертификаты / флаеры A4",
+      "name": "Сертификат / флаер A4",
       "unit": "шт.",
       "units": 1,
-      "material": "PHOTOA4",
       "yield": 1,
+      "material": "A4P",
+      "inkProfile": "A4PHOTO",
+      "sides": 1,
+      "status": "тест",
+      "note": "1 шт. с листа",
       "price": 2.5,
       "tiers": [
         {
@@ -315,17 +439,20 @@
           "to": null,
           "price": 1.7
         }
-      ],
-      "note": ""
+      ]
     },
     {
       "id": "CARD-A6",
       "category": "Открытки",
-      "name": "Открытки A6",
+      "name": "Открытка A6",
       "unit": "шт.",
       "units": 1,
-      "material": "PHOTOA4",
       "yield": 4,
+      "material": "A4P",
+      "inkProfile": "A4PHOTO",
+      "sides": 1,
+      "status": "тест",
+      "note": "4 шт. с листа",
       "price": 3,
       "tiers": [
         {
@@ -343,17 +470,20 @@
           "to": null,
           "price": 1.5
         }
-      ],
-      "note": ""
+      ]
     },
     {
       "id": "DS-ST-NEW",
       "category": "Дизайн",
-      "name": "Стикеры · дизайн по идее",
+      "name": "Стикер по идее",
       "unit": "услуга",
       "units": 1,
-      "material": "NONE",
       "yield": 1,
+      "material": "NONE",
+      "inkProfile": "NONE",
+      "sides": 0,
+      "status": "дизайн",
+      "note": "Без стоимости труда",
       "price": 10,
       "tiers": [
         {
@@ -361,17 +491,20 @@
           "to": null,
           "price": 10
         }
-      ],
-      "note": ""
+      ]
     },
     {
       "id": "DS-CUSTOM",
       "category": "Дизайн",
-      "name": "Индивидуальный дизайн · от 30 ₾",
+      "name": "Индивидуальный дизайн",
       "unit": "услуга",
       "units": 1,
-      "material": "NONE",
       "yield": 1,
+      "material": "NONE",
+      "inkProfile": "NONE",
+      "sides": 0,
+      "status": "дизайн",
+      "note": "Цена заказа индивидуальна",
       "price": 30,
       "tiers": [
         {
@@ -379,8 +512,111 @@
           "to": null,
           "price": 30
         }
-      ],
-      "note": "Согласовать 30–200 ₾; можно изменить тариф."
+      ]
+    },
+    {
+      "id": "DOC-BW1",
+      "category": "Документы",
+      "name": "A4 ч/б 1 сторона",
+      "unit": "лист",
+      "units": 1,
+      "yield": 1,
+      "material": "A4OFF",
+      "inkProfile": "BW",
+      "sides": 1,
+      "status": "утверждено",
+      "note": "Офисная бумага 80 г/м²",
+      "price": 0.3,
+      "tiers": [
+        {
+          "from": 1,
+          "to": 99,
+          "price": 0.3
+        },
+        {
+          "from": 100,
+          "to": null,
+          "price": 0.25
+        }
+      ]
+    },
+    {
+      "id": "DOC-BW2",
+      "category": "Документы",
+      "name": "A4 ч/б 2 стороны",
+      "unit": "лист",
+      "units": 1,
+      "yield": 1,
+      "material": "A4OFF",
+      "inkProfile": "BW",
+      "sides": 2,
+      "status": "утверждено",
+      "note": "Ручная двусторонняя печать",
+      "price": 0.5,
+      "tiers": [
+        {
+          "from": 1,
+          "to": 99,
+          "price": 0.5
+        },
+        {
+          "from": 100,
+          "to": null,
+          "price": 0.4
+        }
+      ]
+    },
+    {
+      "id": "DOC-C1",
+      "category": "Документы",
+      "name": "A4 цвет 1 сторона",
+      "unit": "лист",
+      "units": 1,
+      "yield": 1,
+      "material": "A4OFF",
+      "inkProfile": "COLOR",
+      "sides": 1,
+      "status": "утверждено",
+      "note": "Умеренная цветная заливка",
+      "price": 1,
+      "tiers": [
+        {
+          "from": 1,
+          "to": 99,
+          "price": 1
+        },
+        {
+          "from": 100,
+          "to": null,
+          "price": 0.8
+        }
+      ]
+    },
+    {
+      "id": "DOC-C2",
+      "category": "Документы",
+      "name": "A4 цвет 2 стороны",
+      "unit": "лист",
+      "units": 1,
+      "yield": 1,
+      "material": "A4OFF",
+      "inkProfile": "COLOR",
+      "sides": 2,
+      "status": "утверждено",
+      "note": "Плотные заливки — отдельный расчёт",
+      "price": 1.8,
+      "tiers": [
+        {
+          "from": 1,
+          "to": 99,
+          "price": 1.8
+        },
+        {
+          "from": 100,
+          "to": null,
+          "price": 1.4
+        }
+      ]
     }
   ]
 }

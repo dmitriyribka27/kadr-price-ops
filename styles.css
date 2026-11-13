@@ -376,3 +376,8 @@ footer{
  .tier-header strong{font-size:13px}
  .tier-header small{font-size:10px}
 }
+
+/* Source-of-truth ink cards */
+.ink-profile-list{padding-top:18px;margin-top:16px;border-top:1px solid rgba(108,47,39,.3)}
+.ink-profile-list h3{color:#57201f;margin:0 0 12px;font:700 16px Georgia,serif}
+#settings a{color:#842b2c;text-decoration:underline;text-underline-offset:3px}
