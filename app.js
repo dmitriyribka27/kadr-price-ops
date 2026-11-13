@@ -129,7 +129,7 @@ function renderMaterials(){
 function page(p){
  document.querySelectorAll('.page').forEach(el=>el.classList.toggle('active',el.id===p));
  document.querySelectorAll('.tab').forEach(el=>el.classList.toggle('active',el.dataset.page===p));
- const labels={calculator:['Калькулятор','Цены из Google Таблицы «Прайс КАДР».'],catalog:['Каталог SKU',state.skus.length+' позиций, тарифы по тиражам.'],materials:['Материалы','Бумага и профили чернил по Google Таблице.'],settings:['Данные','Локальные копии и восстановление.']};
+ const labels={calculator:['Калькулятор','Локальный снимок. Текущие цены сверяйте с «Прайс КАДР».'],catalog:['Каталог SKU',state.skus.length+' позиций, локальные тарифы по тиражам.'],materials:['Материалы','Локальные данные. Актуальные расчёты — в «Прайс КАДР».'],settings:['Данные','Локальные копии и восстановление.']};
  $('page-title').textContent=labels[p][0];$('page-subtitle').textContent=labels[p][1];
  if(p==='catalog')renderCatalog();if(p==='materials')renderMaterials()
 }
