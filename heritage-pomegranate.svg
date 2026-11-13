@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 285" role="img" aria-label="Винтажный гранат">
+<defs>
+ <radialGradient id="fruit" cx=".37" cy=".3" r=".78"><stop stop-color="#b65a45"/><stop offset=".38" stop-color="#8c2929"/><stop offset=".78" stop-color="#641b23"/><stop offset="1" stop-color="#390e16"/></radialGradient>
+ <linearGradient id="seed" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#c87a65"/><stop offset=".47" stop-color="#7f2432"/><stop offset="1" stop-color="#3f0b19"/></linearGradient>
+ <filter id="grain"><feTurbulence type="fractalNoise" baseFrequency=".26" numOctaves="2" result="n"/><feComposite in="n" in2="SourceAlpha" operator="in" result="g"/><feBlend in="SourceGraphic" in2="g" mode="multiply"/></filter>
+</defs>
+<g stroke="#311b18" stroke-width="2.3" stroke-linejoin="round">
+ <path d="M70 128Q28 100 14 62Q46 65 79 111Q41 55 50 12Q96 45 94 107Q109 59 152 42Q142 102 108 124Z" fill="#34372b"/>
+ <path d="M64 118Q44 86 31 69M78 111Q75 57 57 30M97 112Q128 79 144 52" fill="none" stroke="#a7a07b" stroke-width="1.4"/>
+ <path d="M137 101Q159 79 174 71L163 101Q194 109 217 94Q211 123 171 129Z" fill="#383a2b"/>
+ <path d="M150 105Q178 111 203 105" fill="none" stroke="#a7a07b" stroke-width="1.2"/>
+ <path d="M116 66Q125 90 120 108" fill="none" stroke="#624134" stroke-width="5"/>
+ <path d="M111 86L99 71 112 75 118 56 123 76 137 68 128 85" fill="#803128"/>
+ <path d="M113 95Q51 103 51 179Q51 252 118 267Q191 265 200 189Q208 119 142 99Q127 90 113 95Z" fill="url(#fruit)" filter="url(#grain)"/>
+ <path d="M130 113Q166 137 174 172" stroke="#dd9276" stroke-width="3" fill="none" opacity=".6"/>
+ <path d="M115 97L100 82 115 85 124 69 130 87 146 84 132 100" fill="#802a28"/>
+ <path d="M88 151Q109 128 144 151Q172 170 167 214Q157 246 117 250Q77 244 71 207Q69 179 88 151Z" fill="#e8c7a1" stroke-width="3.5"/>
+ <path d="M92 161Q122 147 147 166Q167 183 151 221Q138 244 111 238Q77 234 78 202Q77 181 92 161Z" fill="#62212b" stroke-width="1.5"/>
+</g>
+<g stroke="#481018" stroke-width="1.4">
+ <ellipse cx="102" cy="177" rx="12" ry="14" fill="url(#seed)" transform="rotate(-22 102 177)"/>
+ <ellipse cx="128" cy="175" rx="12" ry="14" fill="url(#seed)" transform="rotate(25 128 175)"/>
+ <ellipse cx="149" cy="187" rx="12" ry="14" fill="url(#seed)" transform="rotate(-15 149 187)"/>
+ <ellipse cx="90" cy="200" rx="12" ry="14" fill="url(#seed)" transform="rotate(-35 90 200)"/>
+ <ellipse cx="115" cy="201" rx="12" ry="14" fill="url(#seed)" transform="rotate(17 115 201)"/>
+ <ellipse cx="139" cy="210" rx="12" ry="14" fill="url(#seed)" transform="rotate(-11 139 210)"/>
+ <ellipse cx="105" cy="224" rx="12" ry="13" fill="url(#seed)" transform="rotate(17 105 224)"/>
+</g>
+<g fill="#f4b19b" opacity=".78"><ellipse cx="97" cy="170" rx="2" ry="5" transform="rotate(20 97 170)"/><ellipse cx="125" cy="168" rx="2" ry="4"/><ellipse cx="146" cy="181" rx="2" ry="4"/><ellipse cx="88" cy="193" rx="2" ry="4"/><ellipse cx="112" cy="195" rx="2" ry="4"/><ellipse cx="134" cy="203" rx="2" ry="4"/><ellipse cx="99" cy="218" rx="2" ry="4"/></g>
+</svg>

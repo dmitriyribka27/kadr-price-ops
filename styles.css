@@ -226,3 +226,44 @@ url('./heritage-ornaments.svg');
 background-repeat:no-repeat;background-position:center;background-size:cover}
 footer{background-image:linear-gradient(rgba(234,208,170,.68),rgba(234,208,170,.68)),url('./heritage-ornaments.svg');background-size:cover;background-position:bottom}
 @media(max-width:800px){.topbar{background-size:auto 140px;background-position:center}}
+
+/* KADR heritage illustrations v6 */
+#app::before,#app::after{display:none}
+.container{isolation:isolate}
+.page{position:relative}
+.page::before,.page::after{content:"";position:absolute;z-index:-1;pointer-events:none;background-repeat:no-repeat;background-size:contain;filter:sepia(.05)}
+.page::before{width:160px;height:136px;left:-78px;top:30px;background-image:url('./heritage-carpet.svg');transform:rotate(-17deg);opacity:.75}
+.page::after{width:146px;height:170px;right:-78px;bottom:30px;background-image:url('./heritage-pomegranate.svg');opacity:.83;transform:rotate(9deg)}
+#calculator .form-panel::after{content:"";position:absolute;right:13px;bottom:12px;width:54px;height:54px;background:url('./heritage-stamp.svg') center / contain no-repeat;opacity:.2;pointer-events:none}
+#calculator .hero-metric{background-image:linear-gradient(117deg,#661b1c,#4c1317 68%,#732a24),url('./heritage-carpet.svg')}
+#calculator .hero-metric .hero-ornament{right:22px;bottom:13px;color:#e0bd86;font-size:20px}
+#calculator .breakdown{background-image:linear-gradient(145deg,rgba(255,246,224,.94),rgba(244,220,188,.88)),url('./heritage-carpet.svg');background-position:center,right bottom;background-repeat:no-repeat;background-size:cover,110px}
+#catalog .panel::before,#materials .panel::before,#settings .panel:first-child::before{content:"✦";color:#8b3b32;display:inline-block;position:absolute;right:20px;top:14px;font-size:18px;pointer-events:none;opacity:.6}
+#catalog .panel,#materials .panel,#settings .panel{position:relative}
+#catalog .page,#materials .page,#settings .page{isolation:isolate}
+#catalog .panel-heading,#materials .panel-heading{border-bottom:1px solid var(--line);padding-bottom:13px}
+#catalog .panel-heading h2::before,#materials .panel-heading h2::before,#settings .panel h2::before{content:"✥";display:inline-block;color:#8d382e;padding-right:9px}
+#catalog .table-wrap,#materials .material-list,#settings .settings-actions{position:relative;z-index:1}
+.heritage-interlude{display:flex;align-items:center;justify-content:center;position:relative;min-height:120px;gap:20px;margin:16px 0 0;border-top:1px solid rgba(91,39,31,.22);border-bottom:1px solid rgba(91,39,31,.22);background:linear-gradient(90deg,rgba(116,48,31,.09),transparent 28%,transparent 72%,rgba(116,48,31,.09));overflow:hidden}
+.heritage-interlude::before{content:"";width:140px;height:124px;position:absolute;left:-12px;bottom:-26px;background:url('./heritage-pomegranate.svg') center/contain no-repeat;opacity:.8}
+.heritage-interlude::after{content:"";width:130px;height:123px;position:absolute;right:-24px;bottom:-24px;background:url('./heritage-carpet.svg') center/contain no-repeat;transform:rotate(-11deg);opacity:.8}
+.heritage-interlude .interlude-center{display:flex;align-items:center;gap:14px;text-align:center;color:#61231f;letter-spacing:.18em;font:700 11px Georgia,serif}
+.heritage-interlude .interlude-center::before,.heritage-interlude .interlude-center::after{content:"✦";font-size:19px;color:#8b352b}
+.heritage-interlude .interlude-seal{background:url('./heritage-stamp.svg') center/contain no-repeat;width:70px;height:70px;display:block;filter:drop-shadow(0 3px 2px rgba(56,20,15,.17))}
+.masthead::before,.masthead::after{content:"❖";font-size:14px;color:#8b362b}
+.topbar::before,.topbar::after{content:"✺"}
+.metric:nth-child(1)::before{content:"✧"}
+.metric:nth-child(2)::before{content:"❖"}
+.metric:nth-child(3)::before{content:"✣"}
+.metric:nth-child(4)::before{content:"✥"}
+footer{background-image:linear-gradient(rgba(234,208,170,.78),rgba(234,208,170,.78)),url('./heritage-ornaments.svg')}
+@media(max-width:800px){
+  .page::before{width:96px;height:88px;top:8px;left:-38px;opacity:.42}
+  .page::after{width:110px;height:130px;right:-52px;bottom:10px;opacity:.42}
+  .heritage-interlude{min-height:97px;margin:13px -3px 0}
+  .heritage-interlude::before{width:104px;height:112px;left:-23px;bottom:-35px;opacity:.72}
+  .heritage-interlude::after{width:100px;height:97px;right:-38px;bottom:-22px;opacity:.68}
+  .heritage-interlude .interlude-center{font-size:9px;letter-spacing:.09em;gap:8px;max-width:60%}
+  .heritage-interlude .interlude-seal{width:49px;height:49px;flex:none}
+  #calculator .form-panel::after{width:46px;height:46px;opacity:.13}
+}

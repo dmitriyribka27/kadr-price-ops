@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144 144" role="img" aria-label="Печать КАДР">
+<defs><radialGradient id="wax"><stop stop-color="#9b3c38"/><stop offset=".67" stop-color="#681e25"/><stop offset="1" stop-color="#3d1016"/></radialGradient></defs>
+<path d="M72 4l9 6 11-2 7 9 10 1 6 10 10 4 1 11 9 8-3 12 5 10-7 9-1 12-11 6-4 11-12 1-8 10-12-4-10 6-10-6-12 4-8-10-12-1-4-11-11-6-1-12-7-9 5-10-3-12 9-8 1-11 10-4 6-10 10-1 7-9 11 2Z" fill="url(#wax)" stroke="#3e1115" stroke-width="3"/>
+<circle cx="72" cy="72" r="54" fill="none" stroke="#ca8b65" stroke-width="2"/>
+<circle cx="72" cy="72" r="47" fill="none" stroke="#a55b47" stroke-width="1"/>
+<text x="72" y="99" text-anchor="middle" font-family="Georgia,serif" font-size="79" fill="#ebc89a" font-weight="700">К</text>
+<path d="M72 12l3 6 6 3-6 3-3 6-3-6-6-3 6-3Z" fill="#e6c08e"/>
+</svg>
